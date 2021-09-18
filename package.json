@@ -6,6 +6,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.0",
+    "@apollo/client": "^3.4.12",
     "@mui/material": "^5.0.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -31,7 +32,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
-    "prettier": "prettier --write \"src/**/*.{js,ts,tsx}\""
+    "prettier": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "generate": "graphback generate && graphql codegen"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,6 +57,14 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "^7.25.2",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "@graphql-cli/codegen": "1.17.16",
+    "@graphql-codegen/add": "2.0.2",
+    "@graphql-codegen/typescript": "1.19.0",
+    "@graphql-codegen/typescript-operations": "1.17.12",
+    "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "graphback-cli": "1.1.2",
+    "graphql": "15.4.0",
+    "graphql-cli": "4.1.0"
   }
 }
