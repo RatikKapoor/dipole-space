@@ -1,20 +1,15 @@
-// reserved variables
-
-$primary: $blue;
-$secondary: $orange;
-$tertiary: $pink-red;
-
-$text: $black;
-
-
 // color variables
 //  organized alphabetically by color then prefix i.e. dark, light, white
 
 $black: #000000;
+$black-grey: #4A4A4A;
 
 $blue: #048BA8;
 
 $green-light: #CDEAC0;
+
+$grey-dark: #525151;
+$grey-light: #E3E3E3;
 
 $orange: #FFC24B;
 
@@ -26,3 +21,11 @@ $teal-dark: #0E606B;
 $teal: #1697A6;
 
 $yellow-light: #FDFCDC;
+
+// reserved variables
+
+$primary: $blue;
+$secondary: $orange;
+$tertiary: $pink-red;
+
+$text: $black-grey;
