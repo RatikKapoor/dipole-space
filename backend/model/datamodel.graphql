@@ -9,11 +9,24 @@ type Note {
   comments: [Comment]!
 }
 
+enum Gender {
+  
+}
+
 """ @model """
 type Comment {
   _id: GraphbackObjectID!
   text: String
   description: String
+}
+
+
+""" @model """
+type User {
+  _id: GraphbackObjectID!
+  firstName: String,
+  lastName: String,
+  gender: 
 }
 
 type Query {
