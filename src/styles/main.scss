@@ -1,3 +1,4 @@
+@import './colors';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 body {
@@ -5,4 +6,22 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
+// common components
+.navigation-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    justify-content: center;
+    align-items: center;
+    a {
+        padding: 0 20px;
+        svg {
+            fill: $grey-dark;
+        }
+    }
+    padding: 15px 0;
+    border-top: 1.5px solid $grey-light;
+}

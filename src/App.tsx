@@ -5,25 +5,29 @@ import { Home } from "./pages/Home";
 import { Chat } from "./pages/Chat";
 import { Profile } from "./pages/Profile";
 import { Feed } from "./pages/Feed";
+import { NavigationBar } from "./components/common/NavigationBar";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/chat">
-          <Chat />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/feed">
-          <Feed />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Switch>
+          <Route path="/chat">
+            <Chat />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/feed">
+            <Feed />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+        <NavigationBar />
+      </Router>
+    </>
   );
 };
 
