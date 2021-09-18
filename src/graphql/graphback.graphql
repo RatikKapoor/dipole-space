@@ -57,7 +57,7 @@ fragment HobbyExpandedFields on Hobby {
       email
       phoneNumber
       gender
-      age
+      birthDate
       photoUrl
       bio
    }
@@ -71,7 +71,7 @@ fragment UserFields on User {
    email
    phoneNumber
    gender
-   age
+   birthDate
    photoUrl
    bio
 
@@ -85,7 +85,7 @@ fragment UserExpandedFields on User {
    email
    phoneNumber
    gender
-   age
+   birthDate
    photoUrl
    bio
    hobbies {
@@ -106,7 +106,7 @@ fragment UserExpandedFields on User {
       email
       phoneNumber
       gender
-      age
+      birthDate
       photoUrl
       bio
    }
@@ -118,7 +118,7 @@ fragment UserExpandedFields on User {
       email
       phoneNumber
       gender
-      age
+      birthDate
       photoUrl
       bio
    }
@@ -139,7 +139,7 @@ fragment UserPlanNodeExpandedFields on UserPlanNode {
       email
       phoneNumber
       gender
-      age
+      birthDate
       photoUrl
       bio
    }

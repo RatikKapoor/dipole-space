@@ -61,7 +61,7 @@ type User {
   email: String!
   phoneNumber: String!
   gender: Gender!
-  age: String!
+  birthDate: String!
   photoUrl: String
   bio: String
   """

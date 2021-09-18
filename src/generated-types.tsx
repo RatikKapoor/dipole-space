@@ -79,9 +79,9 @@ export type CreatePlanInput = {
 };
 
 export type CreateUserInput = {
-  age: Scalars['String'];
   authId: Scalars['String'];
   bio?: Maybe<Scalars['String']>;
+  birthDate: Scalars['String'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
@@ -213,9 +213,9 @@ export type MutatePlanInput = {
 
 export type MutateUserInput = {
   _id: Scalars['GraphbackObjectID'];
-  age?: Maybe<Scalars['String']>;
   authId?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
+  birthDate?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   gender?: Maybe<Gender>;
@@ -672,9 +672,9 @@ export type SubscriptionUpdatedUserPlanNodeArgs = {
 export type User = {
   __typename?: 'User';
   _id: Scalars['GraphbackObjectID'];
-  age: Scalars['String'];
   authId: Scalars['String'];
   bio?: Maybe<Scalars['String']>;
+  birthDate: Scalars['String'];
   email: Scalars['String'];
   firstName: Scalars['String'];
   gender: Gender;
@@ -720,10 +720,10 @@ export type UserPlansArgs = {
 
 export type UserFilter = {
   _id?: Maybe<GraphbackObjectIdInput>;
-  age?: Maybe<StringInput>;
   and?: Maybe<Array<UserFilter>>;
   authId?: Maybe<StringInput>;
   bio?: Maybe<StringInput>;
+  birthDate?: Maybe<StringInput>;
   email?: Maybe<StringInput>;
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
@@ -779,10 +779,10 @@ export type UserResultList = {
 
 export type UserSubscriptionFilter = {
   _id?: Maybe<GraphbackObjectIdInput>;
-  age?: Maybe<StringInput>;
   and?: Maybe<Array<UserSubscriptionFilter>>;
   authId?: Maybe<StringInput>;
   bio?: Maybe<StringInput>;
+  birthDate?: Maybe<StringInput>;
   email?: Maybe<StringInput>;
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
@@ -842,18 +842,18 @@ export type HobbyExpandedFieldsFragment = (
   & Pick<Hobby, '_id' | 'type' | 'rate' | 'unit' | 'total'>
   & { users?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   )> }
 );
 
 export type UserFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
 );
 
 export type UserExpandedFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   & { hobbies?: Maybe<Array<Maybe<(
     { __typename?: 'Hobby' }
     & Pick<Hobby, '_id' | 'type' | 'rate' | 'unit' | 'total'>
@@ -862,10 +862,10 @@ export type UserExpandedFieldsFragment = (
     & Pick<UserPlanNode, '_id'>
   )>>>, matches?: Maybe<Array<Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   )>>>, users?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   )> }
 );
 
@@ -879,7 +879,7 @@ export type UserPlanNodeExpandedFieldsFragment = (
   & Pick<UserPlanNode, '_id'>
   & { user?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'age' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   )>, plan?: Maybe<(
     { __typename?: 'Plan' }
     & Pick<Plan, '_id' | 'hobbyType' | 'venue' | 'address' | 'date'>
@@ -1622,7 +1622,7 @@ export const HobbyExpandedFieldsFragmentDoc = gql`
     email
     phoneNumber
     gender
-    age
+    birthDate
     photoUrl
     bio
   }
@@ -1637,7 +1637,7 @@ export const UserFieldsFragmentDoc = gql`
   email
   phoneNumber
   gender
-  age
+  birthDate
   photoUrl
   bio
 }
@@ -1651,7 +1651,7 @@ export const UserExpandedFieldsFragmentDoc = gql`
   email
   phoneNumber
   gender
-  age
+  birthDate
   photoUrl
   bio
   hobbies {
@@ -1672,7 +1672,7 @@ export const UserExpandedFieldsFragmentDoc = gql`
     email
     phoneNumber
     gender
-    age
+    birthDate
     photoUrl
     bio
   }
@@ -1684,7 +1684,7 @@ export const UserExpandedFieldsFragmentDoc = gql`
     email
     phoneNumber
     gender
-    age
+    birthDate
     photoUrl
     bio
   }
@@ -1706,7 +1706,7 @@ export const UserPlanNodeExpandedFieldsFragmentDoc = gql`
     email
     phoneNumber
     gender
-    age
+    birthDate
     photoUrl
     bio
   }
