@@ -1,5 +1,7 @@
 @import './colors';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import './common.scss';
+@import './messages.scss';
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -24,4 +26,8 @@ body {
     }
     padding: 15px 0;
     border-top: 1.5px solid $grey-light;
+}
+
+.root {
+    background-color: $page-bg;
 }
