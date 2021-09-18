@@ -6,11 +6,19 @@ import { Chat } from "./pages/Chat";
 import { Profile } from "./pages/Profile";
 import { Feed } from "./pages/Feed";
 import { NavigationBar } from "./components/common/NavigationBar";
+import { Login } from "./pages/Login";
+import { SignUp } from "./pages/SignUp";
 
 const App: React.FC = () => {
   return (
     <>
       <Router>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
         <Switch>
           <Route path="/chat">
             <Chat />

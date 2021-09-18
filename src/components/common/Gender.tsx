@@ -1,5 +1,5 @@
 import React from "react";
-import { GenderOptions } from "../../types/GenderOptions";
+import { Gender as GenderOptions } from "../../generated-types";
 import { Icon } from "./Icon";
 
 interface GenderProps {

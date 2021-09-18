@@ -75,7 +75,7 @@ input CreateUserInput {
   email: String!
   phoneNumber: String!
   gender: Gender!
-  age: String!
+  birthDate: String!
   photoUrl: String
   bio: String
   usersId: GraphbackObjectID
@@ -209,7 +209,7 @@ input MutateUserInput {
   email: String
   phoneNumber: String
   gender: Gender
-  age: String
+  birthDate: String
   photoUrl: String
   bio: String
   usersId: GraphbackObjectID
@@ -398,7 +398,7 @@ type User {
   email: String!
   phoneNumber: String!
   gender: Gender!
-  age: String!
+  birthDate: String!
   photoUrl: String
   bio: String
 
@@ -432,7 +432,7 @@ input UserFilter {
   email: StringInput
   phoneNumber: StringInput
   gender: StringInput
-  age: StringInput
+  birthDate: StringInput
   photoUrl: StringInput
   bio: StringInput
   usersId: GraphbackObjectIDInput
@@ -493,7 +493,7 @@ input UserSubscriptionFilter {
   email: StringInput
   phoneNumber: StringInput
   gender: StringInput
-  age: StringInput
+  birthDate: StringInput
   photoUrl: StringInput
   bio: StringInput
 }
