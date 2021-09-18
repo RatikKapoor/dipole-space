@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "generate": "graphback generate && graphql codegen"
+    "generate": "graphback generate && graphql-codegen"
   },
   "eslintConfig": {
     "extends": "react-app"
