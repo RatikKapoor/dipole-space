@@ -5,9 +5,9 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import firebase from "firebase/app"
+import { initializeApp } from "firebase/app"
 
-firebase.initializeApp({
+initializeApp({
   apiKey: "AIzaSyCd9fs_oR5Z-e6nDuqidXOmXG3nqIesutY",
   authDomain: "dipole-space.firebaseapp.com",
   projectId: "dipole-space",
