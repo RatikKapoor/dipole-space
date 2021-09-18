@@ -686,6 +686,11 @@ export type User = {
    * @oneToMany(field: 'users', key: 'usersId')
    * @oneToMany(field: 'users')
    */
+  likes?: Maybe<Array<Maybe<User>>>;
+  /**
+   * @oneToMany(field: 'users', key: 'usersId')
+   * @oneToMany(field: 'users')
+   */
   matches?: Maybe<Array<Maybe<User>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
@@ -694,7 +699,7 @@ export type User = {
    * @oneToMany(field: 'user')
    */
   plans?: Maybe<Array<Maybe<UserPlanNode>>>;
-  /** @manyToOne(field: 'matches', key: 'usersId') */
+  /** @manyToOne(field: 'likes', key: 'usersId') */
   users?: Maybe<User>;
 };
 
@@ -702,6 +707,12 @@ export type User = {
 /** @model */
 export type UserHobbiesArgs = {
   filter?: Maybe<HobbyFilter>;
+};
+
+
+/** @model */
+export type UserLikesArgs = {
+  filter?: Maybe<UserFilter>;
 };
 
 

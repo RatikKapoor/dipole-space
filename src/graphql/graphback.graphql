@@ -110,6 +110,18 @@ fragment UserExpandedFields on User {
       photoUrl
       bio
    }
+   likes {
+      _id
+      authId
+      firstName
+      lastName
+      email
+      phoneNumber
+      gender
+      birthDate
+      photoUrl
+      bio
+   }
    users {
       _id
       authId

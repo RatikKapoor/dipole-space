@@ -420,7 +420,13 @@ type User {
   """
   matches(filter: UserFilter): [User]
 
-  """@manyToOne(field: 'matches', key: 'usersId')"""
+  """
+  @oneToMany(field: 'users', key: 'usersId')
+  @oneToMany(field: 'users')
+  """
+  likes(filter: UserFilter): [User]
+
+  """@manyToOne(field: 'likes', key: 'usersId')"""
   users: User
 }
 
