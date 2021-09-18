@@ -1,5 +1,6 @@
-import { Button, List, ListItem, ListItemText, TextField } from "@mui/material";
+import { List, ListItem, ListItemText } from "@mui/material";
 import React from "react";
+import { NavigationBar } from "../components/common/NavigationBar";
 
 export const Chat: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ export const Chat: React.FC = () => {
             </ListItem>
         </List>
       </div>
+      <NavigationBar />
     </>
   );
 };
