@@ -1,0 +1,10 @@
+@import './colors.scss';
+
+.page {
+    background-color: $page-bg;
+}
+
+.section-header {
+    font-weight: 500;
+    font-size: 2em;
+}
