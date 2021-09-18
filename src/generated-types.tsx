@@ -688,6 +688,11 @@ export type User = {
    * @oneToMany(field: 'users', key: 'usersId')
    * @oneToMany(field: 'users')
    */
+  likes?: Maybe<Array<Maybe<User>>>;
+  /**
+   * @oneToMany(field: 'users', key: 'usersId')
+   * @oneToMany(field: 'users')
+   */
   matches?: Maybe<Array<Maybe<User>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
@@ -696,7 +701,7 @@ export type User = {
    * @oneToMany(field: 'user')
    */
   plans?: Maybe<Array<Maybe<UserPlanNode>>>;
-  /** @manyToOne(field: 'matches', key: 'usersId') */
+  /** @manyToOne(field: 'likes', key: 'usersId') */
   users?: Maybe<User>;
 };
 
@@ -704,6 +709,12 @@ export type User = {
 /** @model */
 export type UserHobbiesArgs = {
   filter?: Maybe<HobbyFilter>;
+};
+
+
+/** @model */
+export type UserLikesArgs = {
+  filter?: Maybe<UserFilter>;
 };
 
 
@@ -861,6 +872,9 @@ export type UserExpandedFieldsFragment = (
     { __typename?: 'UserPlanNode' }
     & Pick<UserPlanNode, '_id'>
   )>>>, matches?: Maybe<Array<Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
+  )>>>, likes?: Maybe<Array<Maybe<(
     { __typename?: 'User' }
     & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
   )>>>, users?: Maybe<(
@@ -1665,6 +1679,18 @@ export const UserExpandedFieldsFragmentDoc = gql`
     _id
   }
   matches {
+    _id
+    authId
+    firstName
+    lastName
+    email
+    phoneNumber
+    gender
+    birthDate
+    photoUrl
+    bio
+  }
+  likes {
     _id
     authId
     firstName

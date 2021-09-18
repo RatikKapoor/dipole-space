@@ -64,6 +64,7 @@ type User {
   birthDate: String!
   photoUrl: String
   bio: String
+
   """
   @oneToMany(field: 'users')
   """
@@ -76,6 +77,10 @@ type User {
   @oneToMany(field: 'users')
   """
   matches: [User]
+  """
+  @oneToMany(field: 'users')
+  """
+  likes: [User]
 }
 
 """
