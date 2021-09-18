@@ -1,4 +1,6 @@
-""" @model """
+"""
+@model
+"""
 type Note {
   _id: GraphbackObjectID!
   title: String!
@@ -10,23 +12,92 @@ type Note {
 }
 
 enum Gender {
-  
+  Male
+  Female
+  Other
 }
 
-""" @model """
+enum HobbyType {
+  Cycling
+  Running
+  Weightlifting
+  Yoga
+  Studying
+  Painting
+  Rowing
+  Swimming
+  Music
+  Hiking
+}
+
+"""
+@model
+"""
+type Hobby {
+  _id: GraphbackObjectID!
+  type: HobbyType!
+  rate: Int!
+  unit: String!
+  total: Int
+}
+
+"""
+@model
+"""
 type Comment {
   _id: GraphbackObjectID!
   text: String
   description: String
 }
 
-
-""" @model """
+"""
+@model
+"""
 type User {
   _id: GraphbackObjectID!
-  firstName: String,
-  lastName: String,
-  gender: 
+  authId: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phoneNumber: String!
+  gender: Gender!
+  age: String!
+  photoUrl: String
+  bio: String
+  """
+  @oneToMany(field: 'users')
+  """
+  hobbies: [Hobby]
+  """
+  @oneToMany(field: 'user')
+  """
+  plans: [UserPlanNode]
+  """
+  @oneToMany(field: 'users')
+  """
+  matches: [User]
+}
+
+"""
+@model
+"""
+type Plan {
+  _id: GraphbackObjectID!
+  """
+  @oneToMany(field: 'plan')
+  """
+  users: [UserPlanNode]
+  hobbyType: HobbyType!
+  venue: String!
+  address: String!
+  date: String!
+}
+
+"""
+@model
+"""
+type UserPlanNode {
+  _id: GraphbackObjectID!
 }
 
 type Query {
