@@ -52,4 +52,4 @@ async function start() {
   });
 }
 
-start().catch((err: any) => console.log(err));
+start().catch((err: unknown) => console.log(err));
