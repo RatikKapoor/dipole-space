@@ -1,4 +1,5 @@
 import React from "react";
+import { NavigationBar } from "../components/common/NavigationBar";
 
 export const Home: React.FC = () => {
     return (
@@ -6,6 +7,7 @@ export const Home: React.FC = () => {
             <div>
                 Home
             </div>
+            <NavigationBar />
         </>
     );
 };

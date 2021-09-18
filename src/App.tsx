@@ -8,6 +8,7 @@ import { Feed } from "./pages/Feed";
 import { NavigationBar } from "./components/common/NavigationBar";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
+import { ChatWindow } from "./pages/ChatWindow";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,9 @@ const App: React.FC = () => {
           <Route path="/chat">
             <Chat />
           </Route>
+          <Route path="/chata">
+            <ChatWindow />
+          </Route>
           <Route path="/profile">
             <Profile />
           </Route>
@@ -33,7 +37,6 @@ const App: React.FC = () => {
             <Home />
           </Route>
         </Switch>
-        <NavigationBar />
       </Router>
     </>
   );
