@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
-import { Box, Button, Container, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, Container, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useCreateUserMutation, CreateUserInput, Gender } from '../generated-types'
 import {
@@ -14,7 +14,7 @@ export const SignUp: React.FC = () => {
     const [firstName, setFirstName] = useState<string>("")
     const [lastName, setLastName] = useState<string>("")
     const [phoneNumber, setPhoneNumber] = useState<string>("")
-    const [gender, setGender] = useState<Gender>(Gender.Male)
+    const [gender] = useState<Gender>(Gender.Male)
     const [birthDay, setBirthDay] = useState<string>("")
     const [photoUrl, setPhotoUrl] = useState<string>("")
     const [bio, setBio] = useState<string>("")

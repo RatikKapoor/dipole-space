@@ -2,15 +2,10 @@ import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from "@
 import React, { useState } from "react";
 import {
     getAuth,
-    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    Auth,
-    UserCredential,
 } from "firebase/auth";
 import {
     User as UserData,
-    useCreateUserMutation,
-    useUpdateUserMutation,
     useFindUsersQuery,
 } from "../generated-types"
 
