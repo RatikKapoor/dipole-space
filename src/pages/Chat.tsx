@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavigationBar } from "../components/common/NavigationBar";
-import { getDocs, getFirestore, collection, where, query } from "firebase/firestore"
+import { getDocs, getFirestore, collection, where, query, onSnapshot, doc } from "firebase/firestore"
 import { useAppSelector } from "../app/hooks";
 import { selectUser } from "../features/user/userSlice";
 import { Message, messageConverter } from "../models/message";
@@ -44,13 +44,23 @@ export const Chat: React.FC = () => {
       where("sentTo", "==", user?._id)
     ))
 
-    const messages = [...sentSnapshot.docs.map((v) => v.data()), ...receivedSnapshot.docs.map((v) => v.data())].sort(d => d.timestamp.seconds);
-    console.log(messages)
-    setMessages(messages)
+    const unsortedMessages = [...sentSnapshot.docs.map((v) => v.data()), ...receivedSnapshot.docs.map((v) => v.data())]
+    const sortedMessages = unsortedMessages.sort(((a, b) => a.timestamp.seconds - b.timestamp.seconds));
+    console.log(sortedMessages)
+    setMessages(sortedMessages)
   }
 
+  // useEffect(() => {
+  //   getMessages()
+  // }, [])
   useEffect(() => {
-    getMessages()
+    const unsub = onSnapshot(collection(db, "messages").withConverter(messageConverter), (message) => {
+      console.log("New message", message)
+      getMessages()
+    })
+    return () => {
+      unsub()
+    }
   }, [])
 
   useEffect(() => {
@@ -66,7 +76,7 @@ export const Chat: React.FC = () => {
             <ListItem key={k} onClick={() => history.push(`/chat-session/${m._id}`)}>
               <ListItemText
                 primary={m.firstName}
-                secondary={messages?.reverse().find(message => message.sentBy === m._id || message.sentTo === user?._id)?.message ?? 'No messages'}
+                secondary={messages?.find((message => message.sentBy === m._id && message.sentTo === user?._id) || (message => message.sentBy === user?._id && message.sentTo === m._id))?.message ?? 'No messages'}
               />
             </ListItem>
           )}
