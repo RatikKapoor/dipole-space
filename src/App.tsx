@@ -9,12 +9,16 @@ import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { ChatWindow } from "./pages/ChatWindow";
-import { PrivateRoute } from "./components/common/PrivateRoute"
+import { PrivateRoute } from "./components/common/PrivateRoute";
 import { Landing } from "./pages/Landing";
 import { HobbySelect } from "./pages/HobbySelect";
+<<<<<<< HEAD
 import { useFindUsersQuery, User as UserData } from "./generated-types";
 import { setUser } from "./features/user/userSlice";
 import { useAppDispatch } from "./app/hooks";
+=======
+import { StartMatching } from "./pages/StartMatching";
+>>>>>>> 6323de9 (Co-authored-by: Ratik Kapoor <ratikrk@gmail.com>)
 
 const App: React.FC = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined)
@@ -77,7 +81,7 @@ const App: React.FC = () => {
             <ChatWindow />
           </PrivateRoute>
           <PrivateRoute path="/matching">
-            <Matching />
+            <StartMatching />
           </PrivateRoute>
           <PrivateRoute path="/feed">
             <Feed />

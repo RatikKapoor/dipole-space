@@ -10,20 +10,58 @@ import { ArrowBack, FavoriteRounded, Star } from "@mui/icons-material";
 const name = "Matthew";
 // const gender = "Female";
 const age = "23 Years Old";
-const bio = "Looking for a buddy for short hikes in the rocky mountain region.";
-const topActivities: { id: number, icon: string, activity: string, rate: number, unit: string}[] = [
-  { "id": 1, "icon": "hiking-icon", "activity": "Hiking", "rate": 51, "unit": "km/week"},
-  { "id": 2, "icon": "swimming-icon", "activity": "Swimming", "rate": 23, "unit": "km/week"},
-  { "id": 3, "icon": "cycling-icon", "activity": "Cycling", "rate": 80, "unit": "km/week"}
+const topActivities: {
+  id: number;
+  icon: string;
+  activity: string;
+  rate: number;
+  unit: string;
+}[] = [
+  { id: 1, icon: "hiking-icon", activity: "Hiking", rate: 51, unit: "km/week" },
+  {
+    id: 2,
+    icon: "swimming-icon",
+    activity: "Swimming",
+    rate: 23,
+    unit: "km/week",
+  },
+  {
+    id: 3,
+    icon: "cycling-icon",
+    activity: "Cycling",
+    rate: 80,
+    unit: "km/week",
+  },
 ];
-const futurePlans: { id: number, icon: string, activity: string, location: string, date: string, address: string}[] = [
-  { "id": 1, "icon": "hiking-icon", "activity": "Hiking", "location": "Little Bow Trail", 
-  "date": "September 28th", "address": "2343 Test Ave, Vancouver, BC"},
-  { "id": 2, "icon": "swimming-icon", "activity": "Swimming", "location": "YMCA Southland", 
-  "date": "October 15th", "address": "2938 Test St., Vancouver, BC"}
+const futurePlans: {
+  id: number;
+  icon: string;
+  activity: string;
+  location: string;
+  date: string;
+  address: string;
+}[] = [
+  {
+    id: 1,
+    icon: "hiking-icon",
+    activity: "Hiking",
+    location: "Little Bow Trail",
+    date: "September 28th",
+    address: "2343 Test Ave, Vancouver, BC",
+  },
+  {
+    id: 2,
+    icon: "swimming-icon",
+    activity: "Swimming",
+    location: "YMCA Southland",
+    date: "October 15th",
+    address: "2938 Test St., Vancouver, BC",
+  },
 ];
 
-const Introduction: React.FC = () => {
+const Introduction: React.FC<any> = (props: any) => {
+  const { bio = " " } = props;
+
   return (
   <div className="introduction">
     <h1>{name}</h1>
@@ -41,7 +79,7 @@ const TopActivities: React.FC = () => {
       <div className="activity-list-text">{item.activity} </div>
       <div className="activity-list-subtitle">- {item.rate} {item.unit}</div>
     </li>
-  );
+  )
   return (
     <div className="top-activities">
       <h2>Top Activities</h2>
@@ -53,7 +91,7 @@ const TopActivities: React.FC = () => {
 };
 
 const FuturePlans: React.FC = () => {
-  const listItems = futurePlans.map((item) =>
+  const listItems = futurePlans.map((item) => (
     <li key={item.id}>
       <div className="plans-list-item">
         <div className="plan-list-icon"><Star /></div> 
@@ -63,7 +101,7 @@ const FuturePlans: React.FC = () => {
         <div className="plan-list-map"><Star /></div>
       </div>
     </li>
-  );
+  ));
   return (
     <div className="future-plans">
       <h2>Future Plans</h2>
@@ -72,7 +110,9 @@ const FuturePlans: React.FC = () => {
   );
 };
 
-export const Matching: React.FC = () => {
+export const Matching: React.FC<any> = (props: any) => {
+  const { bio = " " } = props;
+
   return (
     <div className="page">
       <Container>
