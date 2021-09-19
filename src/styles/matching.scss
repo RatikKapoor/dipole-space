@@ -54,6 +54,7 @@
             justify-content: left;
             border-radius: 9px;
             padding: 5px 5px;
+            color: $black-grey;
             .activity-list-icon {
                 width: 25px;
                 height: 25px;        
@@ -64,9 +65,8 @@
                 flex-direction: column;
             }
             .activity-list-subtitle {
-                font-weight: 600;
-                font-size: 9px;
-                color: $black;
+                font-weight: 500;
+                font-size: 11px;
             }
         }
     }
@@ -120,6 +120,8 @@
                 flex-direction: column;
             }
             .plan-list-map {
+                width: 25px;
+                height: 25px;        
                 margin-left: auto;
             }
         }
