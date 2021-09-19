@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavigationBar } from "../components/common/NavigationBar";
-import { getDocs, getFirestore, collection, where, query, onSnapshot, doc } from "firebase/firestore"
+import { getDocs, getFirestore, collection, where, query, onSnapshot } from "firebase/firestore"
 import { useAppSelector } from "../app/hooks";
 import { selectUser } from "../features/user/userSlice";
 import { Message, messageConverter } from "../models/message";
