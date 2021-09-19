@@ -1,37 +1,60 @@
-@import './colors.scss';
+@import "./colors.scss";
 
 .message-window {
-    .message-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100px;
-        width: 100%;
-        border-bottom: 1.5px solid $grey-light;
-        display: flex;
-        align-items: center;
-        .back-button {
-            padding: 0 10px;
-        }
-        .profile-link {
-            display: flex;
-            margin-left: auto;
-            align-items: center;
-        }
+  .message-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    border-bottom: 1.5px solid $grey-light;
+    display: flex;
+    align-items: center;
+    .back-button {
+      padding: 0 10px;
     }
-    .message-compose {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
-        width: 100%;
-        background-color: $white-yellow;
-        padding: 10px;
-        .compose-container {
-            background-color: $grey-light;
-            width: 80%;
-            height: 100%;
-        }
+    .profile-link {
+      display: flex;
+      margin-left: auto;
+      align-items: center;
     }
+  }
+  .message-compose {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    width: 100%;
+    background-color: $white-yellow;
+    padding: 10px;
+    .compose-container {
+      background-color: $grey-light;
+      width: 80%;
+      height: 100%;
+    }
+  }
+
+  .message-bubble {
+    display: flex;
+    &.message-sent {
+      justify-content: flex-end;
+      .message-text {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+    &.message-received {
+      justify-content: flex-start;
+      .message-text {
+        background-color: $green-light;
+        color: $text;
+      }
+    }
+    .message-text {
+      max-width: 75%;
+      border-radius: 33;
+      padding: 10px;
+    }
+  }
 }
