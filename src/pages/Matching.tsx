@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton"
 import { ArrowBack, FavoriteRounded, Star } from "@mui/icons-material";
 
 const name = "Matthew";
-const gender = "Female";
+// const gender = "Female";
 const age = "23 Years Old";
 const bio = "Looking for a buddy for short hikes in the rocky mountain region.";
 const topActivities: { id: number, icon: string, activity: string, rate: number, unit: string}[] = [
