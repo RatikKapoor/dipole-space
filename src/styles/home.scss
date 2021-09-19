@@ -16,6 +16,12 @@
             .post-header {
                 display: flex;
                 padding: 0px 10px;
+                justify-content: center;
+                align-items: center;
+                .avatar {
+                    height: 80px;
+                    width: 80px;
+                }
                 .activity-metric {
                     display: flex;
                     flex-direction: column;
@@ -27,13 +33,32 @@
         .activity-actions {
             display: flex;
             align-content: flex-start;
-            padding: 0 10px;
+            padding: 5px 10px;
             .activity-timeline {
                 margin-left: auto;
             }
         }
         .activity-description{
             padding: 0 15px;
+        }
+        
+        .activity-link {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            .activity-button {
+                display: flex;
+                align-content: center;
+                background-color: $pink-red;
+                padding: 15px 20px;
+                border-radius: 49px;
+                color: $white;
+                .button-text {
+                    display: flex;
+                    flex-direction: column;
+                    color: $white;
+                }
+            }
         }
     }
 }
