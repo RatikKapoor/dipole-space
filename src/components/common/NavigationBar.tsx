@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from './Icon';
@@ -5,7 +6,7 @@ import { Icon } from './Icon';
 export const NavigationBar: React.FC = () => {
     return(
         <div className="navigation-bar">
-            <Link to="/">
+            <Link to="/home">
                 <Icon size={'30px'} icon={"home"} />
             </Link>
             <Link to="/chat">
