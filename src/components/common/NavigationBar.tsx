@@ -11,10 +11,10 @@ export const NavigationBar: React.FC = () => {
             <Link to="/chat">
                 <Icon size={'30px'} icon={"messages"} />
             </Link>
-            <Link to="/profile">
+            <Link to="/matching">
                 <Icon size={'45px'} icon={"dipole"} />
             </Link>
-            <Link to="/profile">
+            <Link to="/matching">
                 <Icon size={'30px'} icon={"user"} />
             </Link>
             <Link to="/settings">
