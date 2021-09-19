@@ -77,8 +77,8 @@ export const StartMatching: React.FC = () => {
     return (
         <>
             {!toggleMatching ? (
-                <div>
-                    <div>Start Matching</div>
+                <div className="smatching-page">
+                    <div className="context-text">Start Matching</div>
                     <Fab
                         color="secondary"
                         onClick={() => {
