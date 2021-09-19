@@ -426,7 +426,13 @@ type User {
   """
   likes(filter: UserFilter): [User]
 
-  """@manyToOne(field: 'likes', key: 'usersId')"""
+  """
+  @oneToMany(field: 'users', key: 'usersId')
+  @oneToMany(field: 'users')
+  """
+  rejected(filter: UserFilter): [User]
+
+  """@manyToOne(field: 'rejected', key: 'usersId')"""
   users: User
 }
 

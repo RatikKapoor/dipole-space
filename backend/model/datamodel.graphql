@@ -81,6 +81,11 @@ type User {
   @oneToMany(field: 'users')
   """
   likes: [User]
+
+  """
+  @oneToMany(field: 'users')
+  """
+  rejected: [User]
 }
 
 """
