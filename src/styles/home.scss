@@ -1,0 +1,39 @@
+@import './colors.scss';
+
+.home-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    .activity-list {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 80px;
+        .activity-post {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+            .post-header {
+                display: flex;
+                padding: 0px 10px;
+                .activity-metric {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: auto;
+                    align-items: center;
+                }
+            }
+        }
+        .activity-actions {
+            display: flex;
+            align-content: flex-start;
+            padding: 0 10px;
+            .activity-timeline {
+                margin-left: auto;
+            }
+        }
+        .activity-description{
+            padding: 0 15px;
+        }
+    }
+}
