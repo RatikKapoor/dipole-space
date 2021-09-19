@@ -3,7 +3,7 @@ import "./styles/main.scss";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Chat } from "./pages/Chat";
-import { Profile } from "./pages/Profile";
+import { Matching } from "./pages/Matching";
 import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
@@ -26,8 +26,8 @@ const App: React.FC = () => {
           <Route path="/chata">
             <ChatWindow />
           </Route>
-          <Route path="/profile">
-            <Profile />
+          <Route path="/matching">
+            <Matching />
           </Route>
           <Route path="/feed">
             <Feed />
