@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { ArrowBack, ChevronRight } from "@mui/icons-material";
