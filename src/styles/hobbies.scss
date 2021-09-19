@@ -1,16 +1,49 @@
 @import "./colors.scss";
 
 .hobby-selection-page {
+  min-height: 100vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  .hobbies-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background-color: $blue;
+  .hobbies-content {
+    z-index: 1;
+    .hobbies-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .hobby-next-button {
+        background-color: $black;
+        width: 75%;
+      }
+    }
+    .hobby-selector {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .hobby-button {
+        margin: 15px;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        background-color: $white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+      }
+    }
   }
-  .hobby-selector {
-    display: flex;
-    flex-wrap: wrap;
+  .dark-waves {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @media screen and (max-width: 430px){
+      &.dark-waves {
+        width: 100vw;
+        bottom: -15%;
+      }
+    }
   }
 }

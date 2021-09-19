@@ -67,9 +67,9 @@ const App: React.FC = () => {
     <>
       <Router>
         <Switch>
-          <PrivateRoute path="/hobby-select">
+          <Route path="/hobby-select">
             <HobbySelect />
-          </PrivateRoute>
+          </Route>
           <PrivateRoute path="/chat">
             <Chat />
           </PrivateRoute>

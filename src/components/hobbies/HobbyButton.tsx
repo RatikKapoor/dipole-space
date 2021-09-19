@@ -5,7 +5,7 @@ interface HobbyProps {
     selected: boolean
 }
 
-export const HobbyButton: React.FC<HobbyProps> = ({ hobby, selected }) => {
+export const HobbyButton: React.FC<HobbyProps> = ({ hobby, selected } : HobbyProps) => {
 
     return (
         <div className={`hobby-button ${selected && 'selected'}`} >
