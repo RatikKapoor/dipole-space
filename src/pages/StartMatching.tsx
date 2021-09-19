@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { RootState } from "../app/store";
 import { useSelector } from "react-redux";
 
 import { NavigateNext } from "@mui/icons-material";
@@ -11,7 +10,6 @@ import { UserReact } from "../components/common/UserReact";
 
 import {
     useFindUsersQuery,
-    useFindHobbiesQuery,
     User as UserData,
     HobbyType,
 } from "../generated-types";
@@ -95,6 +93,7 @@ export const StartMatching: React.FC = () => {
                 <>
                     {currentPotentialMatch && (
                         <Matching
+                            id={currentPotentialMatch._id}
                             age={currentPotentialMatch.birthDate}
                             bio={currentPotentialMatch.bio ?? ""}
                             firstName={currentPotentialMatch.firstName}

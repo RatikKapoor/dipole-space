@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/matching.scss";
 import splash from "../styles/vectors/matching-splash.svg"
 
@@ -7,31 +7,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton"
 import { ArrowBack, FavoriteRounded, Star } from "@mui/icons-material";
-import { Gender, Hobby, HobbyType, Maybe } from "../generated-types";
+import { useFindHobbiesQuery, Gender, Hobby, Maybe } from "../generated-types";
 
-// const topActivities: {
-//   id: number;
-//   icon: string;
-//   activity: string;
-//   rate: number;
-//   unit: string;
-// }[] = [
-//     { id: 1, icon: "hiking-icon", activity: "Hiking", rate: 51, unit: "km/week" },
-//     {
-//       id: 2,
-//       icon: "swimming-icon",
-//       activity: "Swimming",
-//       rate: 23,
-//       unit: "km/week",
-//     },
-//     {
-//       id: 3,
-//       icon: "cycling-icon",
-//       activity: "Cycling",
-//       rate: 80,
-//       unit: "km/week",
-//     },
-//   ];
+
 const futurePlans: {
   id: number;
   icon: string;
@@ -71,11 +49,38 @@ const Introduction: React.FC<MatchingProps> = (props: MatchingProps) => {
 };
 
 const TopActivities: React.FC<MatchingProps> = (props: MatchingProps) => {
+  const { data } = useFindHobbiesQuery();
+  const [hobbies, setHobbies] = useState<Hobby[] | null>([])
+
+  const updateHobbies = () => {
+    const userHobbies: Hobby[] = [];
+
+    const allHobbies = data?.findHobbies.items;
+    allHobbies?.forEach((hobbyData) => {
+      hobbyData && userHobbies.push(hobbyData);
+    });
+
+    //const matchHobbies = allHobbies?.filter(h => h?.usersHobby?._id === props.id)
+    console.log("matchHobbies temp var", userHobbies);
+    setHobbies(userHobbies);
+    console.log("hobbies use state ", hobbies);
+  }
+
+  useEffect(() => {
+    console.log(data)
+
+    if (!data) return
+    updateHobbies();
+
+  }, [data])
+
+
+
   return (
     <div className="top-activities">
       <h2>Top Activities</h2>
       <ul className="activity-list">{props.hobbies &&
-        props.hobbies.map((item) => {
+        hobbies && hobbies.map((item) => {
           item &&
             <li className="activity-list-item" key={item._id}>
               <div className="activity-list-icon"><Star /></div>
@@ -111,20 +116,24 @@ const FuturePlans: React.FC = () => {
 };
 
 interface MatchingProps {
+  id: string
   bio: string
   firstName: string,
   gender: Gender,
   age: string,
   hobbies?: Maybe<Maybe<Hobby>[]> | undefined | null
+  isOwnProfile?: boolean
 }
 
 export const Matching: React.FC<MatchingProps> = (props: MatchingProps) => {
   return (
     <div className="page">
       <Container>
-        <IconButton>
-          <ArrowBack />
-        </IconButton>
+        {!props.isOwnProfile &&
+          <IconButton>
+            <ArrowBack />
+          </IconButton>
+        }
         <Introduction {...props} />
         <div className="splash-container">
           <img src={splash} className="splash" />
