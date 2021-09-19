@@ -1,11 +1,10 @@
 import React from "react";
-import { UserReact } from "../components/common/UserReact";
+import "../styles/matching.scss";
+import splash from "../styles/vectors/matching-splash.svg"
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-
-import "@fontsource/poppins";
+import { Close, FavoriteRounded, Star } from "@mui/icons-material";
 
 const name = "Matthew";
 const gender = "Female";
@@ -25,53 +24,57 @@ const futurePlans: { id: number, icon: string, activity: string, location: strin
 
 const Introduction: React.FC = () => {
   return (
-    <Paper>
+    <div className="introduction">
       <h1>{name}</h1>
-      <p>{gender} {age}</p>
+      <p id="age">{gender} {age}</p>
       <p>{bio}</p>
-    </Paper>
+    </div>
   );
 };
 
 const TopActivities: React.FC = () => {
   const listItems = topActivities.map((item) =>
-    <li key={item.id}>
-      {item.icon} {item.activity} - {item.rate} {item.unit}
+    <li className="activity-list-item" key={item.id}>
+      <span className="icon-placeholder"><Star /></span> {item.activity} - <span className="subtitle">{item.rate} {item.unit}</span>
     </li>
   );
   return (
-    <Paper>
+    <div className="top-activities">
       <h2>Top Activities</h2>
-      <ul>{listItems}</ul>
+      <ul className="activity-list">{listItems}</ul>
       <Button>More Activities</Button>
-    </Paper>
+    </div>
   );
 };
 
 const FuturePlans: React.FC = () => {
   const listItems = futurePlans.map((item) =>
     <li key={item.id}>
-      {item.icon} {item.activity} {item.address}
-      <br/>{item.date}
+      <div className="plans-list-item">
+        <div className="plan-list-icon"><Star /></div> 
+        <div className="plan-list-text">
+          {item.activity} 
+          <br />{item.date}</div>
+        <div className="plan-list-map"><Star /></div>
+      </div>
     </li>
   );
   return (
-    <Paper>
+    <div className="future-plans">
       <h2>Future Plans</h2>
-      <ul>{listItems}</ul>
-    </Paper>
+      <ul className="plans-list">{listItems}</ul>
+    </div>
   );
 };
 
 export const Matching: React.FC = () => {
   return (
     <div className="page">
-      <Container>
+      <Container maxWidth="xs">
         <Introduction />
-        <div className="splashArt"></div>
+        <img src={splash} className="splash" />
         <TopActivities />
         <FuturePlans />
-        <UserReact />
       </Container>
     </div>
   );
