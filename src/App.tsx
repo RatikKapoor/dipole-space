@@ -9,16 +9,17 @@ import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { ChatWindow } from "./pages/ChatWindow";
 import { PrivateRoute } from "./components/common/PrivateRoute"
-import { useAppSelector } from "./app/hooks";
-import { selectUser } from "./features/user/userSlice";
-import { useEffect } from "hoist-non-react-statics/node_modules/@types/react";
 import { Landing } from "./pages/Landing";
+import { HobbySelect } from "./pages/HobbySelect";
 
 const App: React.FC = () => {
   return (
     <>
       <Router>
         <Switch>
+          <PrivateRoute path="/hobby-select">
+            <HobbySelect />
+          </PrivateRoute>
           <PrivateRoute path="/chat">
             <Chat />
           </PrivateRoute>
