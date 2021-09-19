@@ -1,0 +1,41 @@
+@import "./colors.scss";
+
+.auth-screen {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 10px;
+
+  .auth-fields {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    .auth-field {
+      margin: 8px 0;
+    }
+  }
+
+  .auth-button {
+    border-radius: 25px;
+    background-color: $pink-red;
+    height: 55px;
+  }
+
+  .auth-header {
+    margin-bottom: 40%;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    > h2 {
+      color: $teal;
+    }
+  }
+
+  .signup-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .signup-link {
+      text-decoration: underline;
+    }
+  }
+}
