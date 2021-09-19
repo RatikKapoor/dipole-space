@@ -9,7 +9,7 @@ import { Message, messageConverter } from "../models/message";
 
 export const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<Message[] | null>(null)
-  const [match, setMatch] = useState<User | null>(null)
+  // const [match, setMatch] = useState<User | null>(null)
   const { user } = useAppSelector(selectUser);
   const db = getFirestore();
   const { id } = useParams<{ id: string }>()
@@ -19,7 +19,7 @@ export const ChatWindow: React.FC = () => {
 
     const userQuery = useGetUserQuery({ variables: { id: id } })
     const matchedUser = userQuery.data?.getUser
-    setMatch(matchedUser as User)
+    // setMatch(matchedUser as User)
   }
 
   const getMessages = async (): Promise<void> => {
