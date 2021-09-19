@@ -61,7 +61,12 @@ export type CreateHobbyInput = {
   total?: Maybe<Scalars['Int']>;
   type: HobbyType;
   unit: Scalars['String'];
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  usersHobbyId?: Maybe<Scalars['GraphbackObjectID']>;
+};
+
+export type CreateMatchNodeInput = {
+  user1: Scalars['String'];
+  user2: Scalars['String'];
 };
 
 export type CreateNoteInput = {
@@ -84,9 +89,10 @@ export type CreateUserInput = {
   firstName: Scalars['String'];
   gender: Gender;
   lastName: Scalars['String'];
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type CreateUserPlanNodeInput = {
@@ -120,8 +126,8 @@ export type Hobby = {
   total?: Maybe<Scalars['Int']>;
   type: HobbyType;
   unit: Scalars['String'];
-  /** @manyToOne(field: 'hobbies', key: 'usersId') */
-  users?: Maybe<User>;
+  /** @manyToOne(field: 'hobbies', key: 'usersHobbyId') */
+  usersHobby?: Maybe<User>;
 };
 
 export type HobbyFilter = {
@@ -133,7 +139,7 @@ export type HobbyFilter = {
   total?: Maybe<IntInput>;
   type?: Maybe<StringInput>;
   unit?: Maybe<StringInput>;
-  usersId?: Maybe<GraphbackObjectIdInput>;
+  usersHobbyId?: Maybe<GraphbackObjectIdInput>;
 };
 
 export type HobbyResultList = {
@@ -179,6 +185,40 @@ export type IntInput = {
   ne?: Maybe<Scalars['Int']>;
 };
 
+/** @model */
+export type MatchNode = {
+  __typename?: 'MatchNode';
+  _id: Scalars['GraphbackObjectID'];
+  user1: Scalars['String'];
+  user2: Scalars['String'];
+};
+
+export type MatchNodeFilter = {
+  _id?: Maybe<GraphbackObjectIdInput>;
+  and?: Maybe<Array<MatchNodeFilter>>;
+  not?: Maybe<MatchNodeFilter>;
+  or?: Maybe<Array<MatchNodeFilter>>;
+  user1?: Maybe<StringInput>;
+  user2?: Maybe<StringInput>;
+};
+
+export type MatchNodeResultList = {
+  __typename?: 'MatchNodeResultList';
+  count?: Maybe<Scalars['Int']>;
+  items: Array<Maybe<MatchNode>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+export type MatchNodeSubscriptionFilter = {
+  _id?: Maybe<GraphbackObjectIdInput>;
+  and?: Maybe<Array<MatchNodeSubscriptionFilter>>;
+  not?: Maybe<MatchNodeSubscriptionFilter>;
+  or?: Maybe<Array<MatchNodeSubscriptionFilter>>;
+  user1?: Maybe<StringInput>;
+  user2?: Maybe<StringInput>;
+};
+
 export type MutateCommentInput = {
   _id: Scalars['GraphbackObjectID'];
   description?: Maybe<Scalars['String']>;
@@ -192,7 +232,13 @@ export type MutateHobbyInput = {
   total?: Maybe<Scalars['Int']>;
   type?: Maybe<HobbyType>;
   unit?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  usersHobbyId?: Maybe<Scalars['GraphbackObjectID']>;
+};
+
+export type MutateMatchNodeInput = {
+  _id: Scalars['GraphbackObjectID'];
+  user1?: Maybe<Scalars['String']>;
+  user2?: Maybe<Scalars['String']>;
 };
 
 export type MutateNoteInput = {
@@ -218,9 +264,10 @@ export type MutateUserInput = {
   firstName?: Maybe<Scalars['String']>;
   gender?: Maybe<Gender>;
   lastName?: Maybe<Scalars['String']>;
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber?: Maybe<Scalars['String']>;
   photoUrl?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type MutateUserPlanNodeInput = {
@@ -233,18 +280,21 @@ export type Mutation = {
   __typename?: 'Mutation';
   createComment?: Maybe<Comment>;
   createHobby?: Maybe<Hobby>;
+  createMatchNode?: Maybe<MatchNode>;
   createNote?: Maybe<Note>;
   createPlan?: Maybe<Plan>;
   createUser?: Maybe<User>;
   createUserPlanNode?: Maybe<UserPlanNode>;
   deleteComment?: Maybe<Comment>;
   deleteHobby?: Maybe<Hobby>;
+  deleteMatchNode?: Maybe<MatchNode>;
   deleteNote?: Maybe<Note>;
   deletePlan?: Maybe<Plan>;
   deleteUser?: Maybe<User>;
   deleteUserPlanNode?: Maybe<UserPlanNode>;
   updateComment?: Maybe<Comment>;
   updateHobby?: Maybe<Hobby>;
+  updateMatchNode?: Maybe<MatchNode>;
   updateNote?: Maybe<Note>;
   updatePlan?: Maybe<Plan>;
   updateUser?: Maybe<User>;
@@ -259,6 +309,11 @@ export type MutationCreateCommentArgs = {
 
 export type MutationCreateHobbyArgs = {
   input: CreateHobbyInput;
+};
+
+
+export type MutationCreateMatchNodeArgs = {
+  input: CreateMatchNodeInput;
 };
 
 
@@ -292,6 +347,11 @@ export type MutationDeleteHobbyArgs = {
 };
 
 
+export type MutationDeleteMatchNodeArgs = {
+  input: MutateMatchNodeInput;
+};
+
+
 export type MutationDeleteNoteArgs = {
   input: MutateNoteInput;
 };
@@ -319,6 +379,11 @@ export type MutationUpdateCommentArgs = {
 
 export type MutationUpdateHobbyArgs = {
   input: MutateHobbyInput;
+};
+
+
+export type MutationUpdateMatchNodeArgs = {
+  input: MutateMatchNodeInput;
 };
 
 
@@ -451,6 +516,7 @@ export type Query = {
   __typename?: 'Query';
   findComments: CommentResultList;
   findHobbies: HobbyResultList;
+  findMatchNodes: MatchNodeResultList;
   findNotes: NoteResultList;
   findPlans: PlanResultList;
   findUserPlanNodes: UserPlanNodeResultList;
@@ -458,6 +524,7 @@ export type Query = {
   getComment?: Maybe<Comment>;
   getDraftNotes?: Maybe<Array<Maybe<Note>>>;
   getHobby?: Maybe<Hobby>;
+  getMatchNode?: Maybe<MatchNode>;
   getNote?: Maybe<Note>;
   getPlan?: Maybe<Plan>;
   getUser?: Maybe<User>;
@@ -474,6 +541,13 @@ export type QueryFindCommentsArgs = {
 
 export type QueryFindHobbiesArgs = {
   filter?: Maybe<HobbyFilter>;
+  orderBy?: Maybe<OrderByInput>;
+  page?: Maybe<PageRequest>;
+};
+
+
+export type QueryFindMatchNodesArgs = {
+  filter?: Maybe<MatchNodeFilter>;
   orderBy?: Maybe<OrderByInput>;
   page?: Maybe<PageRequest>;
 };
@@ -513,6 +587,11 @@ export type QueryGetCommentArgs = {
 
 
 export type QueryGetHobbyArgs = {
+  id: Scalars['GraphbackObjectID'];
+};
+
+
+export type QueryGetMatchNodeArgs = {
   id: Scalars['GraphbackObjectID'];
 };
 
@@ -558,18 +637,21 @@ export type Subscription = {
   __typename?: 'Subscription';
   deletedComment: Comment;
   deletedHobby: Hobby;
+  deletedMatchNode: MatchNode;
   deletedNote: Note;
   deletedPlan: Plan;
   deletedUser: User;
   deletedUserPlanNode: UserPlanNode;
   newComment: Comment;
   newHobby: Hobby;
+  newMatchNode: MatchNode;
   newNote: Note;
   newPlan: Plan;
   newUser: User;
   newUserPlanNode: UserPlanNode;
   updatedComment: Comment;
   updatedHobby: Hobby;
+  updatedMatchNode: MatchNode;
   updatedNote: Note;
   updatedPlan: Plan;
   updatedUser: User;
@@ -584,6 +666,11 @@ export type SubscriptionDeletedCommentArgs = {
 
 export type SubscriptionDeletedHobbyArgs = {
   filter?: Maybe<HobbySubscriptionFilter>;
+};
+
+
+export type SubscriptionDeletedMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
 };
 
 
@@ -617,6 +704,11 @@ export type SubscriptionNewHobbyArgs = {
 };
 
 
+export type SubscriptionNewMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
+};
+
+
 export type SubscriptionNewNoteArgs = {
   filter?: Maybe<NoteSubscriptionFilter>;
 };
@@ -644,6 +736,11 @@ export type SubscriptionUpdatedCommentArgs = {
 
 export type SubscriptionUpdatedHobbyArgs = {
   filter?: Maybe<HobbySubscriptionFilter>;
+};
+
+
+export type SubscriptionUpdatedMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
 };
 
 
@@ -677,21 +774,12 @@ export type User = {
   firstName: Scalars['String'];
   gender: Gender;
   /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
+   * @oneToMany(field: 'usersHobby', key: 'usersHobbyId')
+   * @oneToMany(field: 'usersHobby')
    */
   hobbies?: Maybe<Array<Maybe<Hobby>>>;
   lastName: Scalars['String'];
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  likes?: Maybe<Array<Maybe<User>>>;
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  matches?: Maybe<Array<Maybe<User>>>;
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
   /**
@@ -699,13 +787,7 @@ export type User = {
    * @oneToMany(field: 'user')
    */
   plans?: Maybe<Array<Maybe<UserPlanNode>>>;
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  rejected?: Maybe<Array<Maybe<User>>>;
-  /** @manyToOne(field: 'rejected', key: 'usersId') */
-  users?: Maybe<User>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -716,26 +798,8 @@ export type UserHobbiesArgs = {
 
 
 /** @model */
-export type UserLikesArgs = {
-  filter?: Maybe<UserFilter>;
-};
-
-
-/** @model */
-export type UserMatchesArgs = {
-  filter?: Maybe<UserFilter>;
-};
-
-
-/** @model */
 export type UserPlansArgs = {
   filter?: Maybe<UserPlanNodeFilter>;
-};
-
-
-/** @model */
-export type UserRejectedArgs = {
-  filter?: Maybe<UserFilter>;
 };
 
 export type UserFilter = {
@@ -748,11 +812,12 @@ export type UserFilter = {
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
   lastName?: Maybe<StringInput>;
+  likes?: Maybe<StringInput>;
   not?: Maybe<UserFilter>;
   or?: Maybe<Array<UserFilter>>;
   phoneNumber?: Maybe<StringInput>;
   photoUrl?: Maybe<StringInput>;
-  usersId?: Maybe<GraphbackObjectIdInput>;
+  rejected?: Maybe<StringInput>;
 };
 
 /** @model */
@@ -807,8 +872,10 @@ export type UserSubscriptionFilter = {
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
   lastName?: Maybe<StringInput>;
+  likes?: Maybe<StringInput>;
   not?: Maybe<UserSubscriptionFilter>;
   or?: Maybe<Array<UserSubscriptionFilter>>;
   phoneNumber?: Maybe<StringInput>;
   photoUrl?: Maybe<StringInput>;
+  rejected?: Maybe<StringInput>;
 };
