@@ -1,10 +1,8 @@
 @import "./colors.scss";
 
 .message-window {
+  height: 100vh;
   .message-header {
-    position: fixed;
-    top: 0;
-    left: 0;
     height: 100px;
     width: 100%;
     border-bottom: 1.5px solid $grey-light;
@@ -35,26 +33,31 @@
     }
   }
 
-  .message-bubble {
+  .messages {
     display: flex;
-    &.message-sent {
-      justify-content: flex-end;
-      .message-text {
-        background-color: $blue;
-        color: $white;
+    flex-direction: column;
+    margin: 0 15px;
+    .message-bubble {
+      display: flex;
+      &.message-sent {
+        justify-content: flex-end;
+        .message-text {
+          background-color: $blue;
+          color: $white;
+        }
       }
-    }
-    &.message-received {
-      justify-content: flex-start;
-      .message-text {
-        background-color: $green-light;
-        color: $text;
+      &.message-received {
+        justify-content: flex-start;
+        .message-text {
+          background-color: $grey-light;
+          color: $text;
+        }
       }
-    }
-    .message-text {
-      max-width: 75%;
-      border-radius: 33;
-      padding: 10px;
+      .message-text {
+        max-width: 75%;
+        border-radius: 33px;
+        padding: 20px;
+      }
     }
   }
 }
