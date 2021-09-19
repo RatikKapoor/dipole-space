@@ -1,155 +1,157 @@
 @import './colors.scss';
 
-.introduction {
-    width: 70%;
-    #age {   
-        font-weight: normal;
-        font-size: 21.5px;
-
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        padding: 5px 0px;
-        .age-text {
-            padding: 0px 10px;
-        }
-    }
-}
-
-.icon {
-    width: 25px;
-    height: 25px;      
-}
-
-.splash-container {
-    display: flex;
-    justify-content: center;
-    .splash {
-        margin-top: -100px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100vw;
-        border-radius: 0px 0px 55px 55px;        
-    }
-}
-
-.top-activities {
-
+.matching-page {
+    .introduction {
+        width: 70%;
+        #age {   
+            font-weight: normal;
+            font-size: 21.5px;
     
-    .activity-list {
-        display: flex;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        flex-direction: column;
-        >li {
-            padding: 5px 0;
-        }
-
-        .activity-list-item {
             display: flex;
             align-items: center;
             justify-content: left;
-            border-radius: 9px;
-            padding: 5px 5px;
-            color: $black-grey;
-            .activity-list-icon {
-                width: 25px;
-                height: 25px;        
-            }
-            .activity-list-text {
+            padding: 5px 0px;
+            .age-text {
                 padding: 0px 10px;
-                display: flex;
-                flex-direction: column;
-            }
-            .activity-list-subtitle {
-                font-weight: 500;
-                font-size: 11px;
             }
         }
     }
-
-    #more-activities {
-        float: right;
-        font-size: 8px;
+    
+    .icon {
+        width: 25px;
+        height: 25px;      
     }
-
-}
-
-.divider {
-    justify-content: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-    height: 3px;
-    background: $grey-light;
-    margin-top: 30px;
-}
-
-.future-plans {
-
-    .plans-list {
+    
+    .splash-container {
         display: flex;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        flex-direction: column;
-        >li {
-            padding: 5px 0;
-        }
-
-        .plans-list-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: $black;
-            border-radius: 9px;
-            color: white;
-            padding: 5px 10px;
-            .plan-list-icon {
-                width: 25px;
-                height: 25px;        
-            }
-            .plan-list-text {
-                padding: 0px 10px;
-                display: flex;
-                flex-direction: column;
-            }
-            .plan-list-map {
-                width: 25px;
-                height: 25px;        
-                margin-left: auto;
-            }
+        justify-content: center;
+        .splash {
+            margin-top: -100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100vw;
+            border-radius: 0px 0px 55px 55px;        
         }
     }
-
-
-}
-
-h1 {
-    font-weight: 800;
-    font-size: 52.5px;
-    color: $black-grey;
-    margin: 0;
-    padding: 3px 0;
-    height: 60px;
-}
-
-h2 {
-    margin: 30px 0 5px 0;
-    font-weight: 600;
-    font-size: 25.5px;
-    color: $black-grey;
-}
-
-p {
-    margin: 0;
-    padding: 3px 0;
-    color: $black-grey;
-
+    
+    .top-activities {
+    
+        
+        .activity-list {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            flex-direction: column;
+            >li {
+                padding: 5px 0;
+            }
+    
+            .activity-list-item {
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                border-radius: 9px;
+                padding: 5px 5px;
+                color: $black-grey;
+                .activity-list-icon {
+                    width: 25px;
+                    height: 25px;        
+                }
+                .activity-list-text {
+                    padding: 0px 10px;
+                    display: flex;
+                    flex-direction: column;
+                }
+                .activity-list-subtitle {
+                    font-weight: 500;
+                    font-size: 11px;
+                }
+            }
+        }
+    
+        #more-activities {
+            float: right;
+            font-size: 8px;
+        }
+    
+    }
+    
+    .divider {
+        justify-content: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        height: 3px;
+        background: $grey-light;
+        margin-top: 30px;
+    }
+    
+    .future-plans {
+    
+        .plans-list {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            flex-direction: column;
+            >li {
+                padding: 5px 0;
+            }
+    
+            .plans-list-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: $black;
+                border-radius: 9px;
+                color: white;
+                padding: 5px 10px;
+                .plan-list-icon {
+                    width: 25px;
+                    height: 25px;        
+                }
+                .plan-list-text {
+                    padding: 0px 10px;
+                    display: flex;
+                    flex-direction: column;
+                }
+                .plan-list-map {
+                    width: 25px;
+                    height: 25px;        
+                    margin-left: auto;
+                }
+            }
+        }
+    
+    
+    }
+    
+    h1 {
+        font-weight: 800;
+        font-size: 52.5px;
+        color: $black-grey;
+        margin: 0;
+        padding: 3px 0;
+        height: 60px;
+    }
+    
+    h2 {
+        margin: 30px 0 5px 0;
+        font-weight: 600;
+        font-size: 25.5px;
+        color: $black-grey;
+    }
+    
+    p {
+        margin: 0;
+        padding: 3px 0;
+        color: $black-grey;
+    
+    }
 }
 
