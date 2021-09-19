@@ -8,27 +8,28 @@ import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { ChatWindow } from "./pages/ChatWindow";
+import { PrivateRoute } from "./components/common/PrivateRoute"
 
 const App: React.FC = () => {
   return (
     <>
       <Router>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
           <Route path="/chat">
             <Chat />
           </Route>
           <Route path="/chata">
             <ChatWindow />
           </Route>
-          <Route path="/matching">
+          <PrivateRoute path="/matching">
             <Matching />
-          </Route>
+          </PrivateRoute>
           <Route path="/feed">
             <Feed />
           </Route>
