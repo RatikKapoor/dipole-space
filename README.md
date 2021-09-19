@@ -18,7 +18,7 @@ Our backend stack is based on a Node.JS and Apollo server which provides a Graph
 
 ---
 
-## ###Technologies Used (Our Stack)
+## Technologies Used (Our Stack)
 
 ![DipoleStack](https://i.imgur.com/jJmI5gZ.png)
 
