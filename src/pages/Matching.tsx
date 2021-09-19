@@ -111,8 +111,8 @@ const FuturePlans: React.FC = () => {
   );
 };
 
-export const Matching: React.FC<any> = (props: any) => {
-  const { bio = " " } = props;
+export const Matching: React.FC<any> = () => {
+  // const { bio = " " } = props;
 
   return (
     <div className="page">

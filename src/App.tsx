@@ -3,7 +3,6 @@ import "./styles/main.scss";
 import { Route, BrowserRouter as Router, Switch, useHistory } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Chat } from "./pages/Chat";
-import { Matching } from "./pages/Matching";
 import { Profile } from "./pages/Profile";
 import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
