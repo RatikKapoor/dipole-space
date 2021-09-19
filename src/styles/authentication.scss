@@ -28,10 +28,13 @@
   }
 
   .auth-header {
-    margin-bottom: 40%;
+    margin-bottom: 30%;
     display: flex;
     justify-content: center;
     font-size: 1.2em;
+    &.less-margin {
+      margin-bottom: 15%;
+    }
     > h2 {
       color: $teal;
     }
@@ -43,6 +46,26 @@
     align-items: center;
     .signup-link {
       text-decoration: underline;
+    }
+  }
+  
+  .footer-waves {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    @media screen and (max-width: 430px){
+      &.dark-waves {
+        max-height: 25%;
+        &.shorter {
+          max-height: 20%;
+        }
+      }
+      &.light-waves {
+        max-height: 20%;
+      }
+    }
+    @media screen and (min-width: 430px){
+      width: 100%;
     }
   }
 }
