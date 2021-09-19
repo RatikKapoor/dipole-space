@@ -127,7 +127,7 @@ interface MatchingProps {
 
 export const Matching: React.FC<MatchingProps> = (props: MatchingProps) => {
   return (
-    <div className="page">
+    <div className="page matching-page">
       <Container>
         {!props.isOwnProfile &&
           <IconButton>
