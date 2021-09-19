@@ -24,28 +24,29 @@ const futurePlans: { id: number, icon: string, activity: string, location: strin
 
 const Introduction: React.FC = () => {
   return (
-    <>
-    <div className="introduction">
-      <h1>{name}</h1>
-      <p id="age">{gender} {age}</p>
-      <p>{bio}</p>
-    </div>
-    <img className="splash" src={splash}/>
-    </>
+  <div className="introduction">
+    <h1>{name}</h1>
+    <p id="age"><div className="icon"><FavoriteRounded /></div>
+    <div className="age-text">{age}</div></p>
+    <p>{bio}</p>
+  </div>
   );
 };
 
 const TopActivities: React.FC = () => {
   const listItems = topActivities.map((item) =>
     <li className="activity-list-item" key={item.id}>
-      <span className="icon-placeholder"><Star /></span> {item.activity} - <span className="subtitle">{item.rate} {item.unit}</span>
+      <div className="activity-list-icon"><Star /></div> 
+      <div className="activity-list-text">{item.activity} </div>
+      <div className="activity-list-subtitle">- {item.rate} {item.unit}</div>
     </li>
   );
   return (
     <div className="top-activities">
       <h2>Top Activities</h2>
       <ul className="activity-list">{listItems}</ul>
-      <div id="more-activities"><Button>More Activities</Button></div>
+      <div id="more-activities">
+        <Button sx={{fontFamily:'Poppins', fontSize: 9, textTransform: 'none'}}>More Activities {">"}</Button></div>
     </div>
   );
 };
@@ -75,7 +76,11 @@ export const Matching: React.FC = () => {
     <div className="page">
       <Container maxWidth="xs">
         <Introduction />
+        <div className="splash-container">
+          <img src={splash} className="splash" />
+        </div>
         <TopActivities />
+        <div className="divider"></div>
         <FuturePlans />
       </Container>
     </div>
