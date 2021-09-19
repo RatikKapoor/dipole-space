@@ -3,7 +3,6 @@ import "./styles/main.scss";
 import { Route, BrowserRouter as Router, Switch, useHistory } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Chat } from "./pages/Chat";
-import { Matching } from "./pages/Matching";
 import { Profile } from "./pages/Profile";
 import { Feed } from "./pages/Feed";
 import { Login } from "./pages/Login";
@@ -15,6 +14,7 @@ import { HobbySelect } from "./pages/HobbySelect";
 import { useFindUsersQuery, User as UserData } from "./generated-types";
 import { setUser } from "./features/user/userSlice";
 import { useAppDispatch } from "./app/hooks";
+import { StartMatching } from "./pages/StartMatching";
 
 const App: React.FC = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined)
@@ -77,7 +77,7 @@ const App: React.FC = () => {
             <ChatWindow />
           </PrivateRoute>
           <PrivateRoute path="/matching">
-            <Matching />
+            <StartMatching />
           </PrivateRoute>
           <PrivateRoute path="/feed">
             <Feed />
