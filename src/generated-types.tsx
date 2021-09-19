@@ -63,7 +63,12 @@ export type CreateHobbyInput = {
   total?: Maybe<Scalars['Int']>;
   type: HobbyType;
   unit: Scalars['String'];
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  usersHobbyId?: Maybe<Scalars['GraphbackObjectID']>;
+};
+
+export type CreateMatchNodeInput = {
+  user1: Scalars['String'];
+  user2: Scalars['String'];
 };
 
 export type CreateNoteInput = {
@@ -86,9 +91,10 @@ export type CreateUserInput = {
   firstName: Scalars['String'];
   gender: Gender;
   lastName: Scalars['String'];
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type CreateUserPlanNodeInput = {
@@ -122,8 +128,8 @@ export type Hobby = {
   total?: Maybe<Scalars['Int']>;
   type: HobbyType;
   unit: Scalars['String'];
-  /** @manyToOne(field: 'hobbies', key: 'usersId') */
-  users?: Maybe<User>;
+  /** @manyToOne(field: 'hobbies', key: 'usersHobbyId') */
+  usersHobby?: Maybe<User>;
 };
 
 export type HobbyFilter = {
@@ -135,7 +141,7 @@ export type HobbyFilter = {
   total?: Maybe<IntInput>;
   type?: Maybe<StringInput>;
   unit?: Maybe<StringInput>;
-  usersId?: Maybe<GraphbackObjectIdInput>;
+  usersHobbyId?: Maybe<GraphbackObjectIdInput>;
 };
 
 export type HobbyResultList = {
@@ -181,6 +187,40 @@ export type IntInput = {
   ne?: Maybe<Scalars['Int']>;
 };
 
+/** @model */
+export type MatchNode = {
+  __typename?: 'MatchNode';
+  _id: Scalars['GraphbackObjectID'];
+  user1: Scalars['String'];
+  user2: Scalars['String'];
+};
+
+export type MatchNodeFilter = {
+  _id?: Maybe<GraphbackObjectIdInput>;
+  and?: Maybe<Array<MatchNodeFilter>>;
+  not?: Maybe<MatchNodeFilter>;
+  or?: Maybe<Array<MatchNodeFilter>>;
+  user1?: Maybe<StringInput>;
+  user2?: Maybe<StringInput>;
+};
+
+export type MatchNodeResultList = {
+  __typename?: 'MatchNodeResultList';
+  count?: Maybe<Scalars['Int']>;
+  items: Array<Maybe<MatchNode>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+};
+
+export type MatchNodeSubscriptionFilter = {
+  _id?: Maybe<GraphbackObjectIdInput>;
+  and?: Maybe<Array<MatchNodeSubscriptionFilter>>;
+  not?: Maybe<MatchNodeSubscriptionFilter>;
+  or?: Maybe<Array<MatchNodeSubscriptionFilter>>;
+  user1?: Maybe<StringInput>;
+  user2?: Maybe<StringInput>;
+};
+
 export type MutateCommentInput = {
   _id: Scalars['GraphbackObjectID'];
   description?: Maybe<Scalars['String']>;
@@ -194,7 +234,13 @@ export type MutateHobbyInput = {
   total?: Maybe<Scalars['Int']>;
   type?: Maybe<HobbyType>;
   unit?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  usersHobbyId?: Maybe<Scalars['GraphbackObjectID']>;
+};
+
+export type MutateMatchNodeInput = {
+  _id: Scalars['GraphbackObjectID'];
+  user1?: Maybe<Scalars['String']>;
+  user2?: Maybe<Scalars['String']>;
 };
 
 export type MutateNoteInput = {
@@ -220,9 +266,10 @@ export type MutateUserInput = {
   firstName?: Maybe<Scalars['String']>;
   gender?: Maybe<Gender>;
   lastName?: Maybe<Scalars['String']>;
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber?: Maybe<Scalars['String']>;
   photoUrl?: Maybe<Scalars['String']>;
-  usersId?: Maybe<Scalars['GraphbackObjectID']>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type MutateUserPlanNodeInput = {
@@ -235,18 +282,21 @@ export type Mutation = {
   __typename?: 'Mutation';
   createComment?: Maybe<Comment>;
   createHobby?: Maybe<Hobby>;
+  createMatchNode?: Maybe<MatchNode>;
   createNote?: Maybe<Note>;
   createPlan?: Maybe<Plan>;
   createUser?: Maybe<User>;
   createUserPlanNode?: Maybe<UserPlanNode>;
   deleteComment?: Maybe<Comment>;
   deleteHobby?: Maybe<Hobby>;
+  deleteMatchNode?: Maybe<MatchNode>;
   deleteNote?: Maybe<Note>;
   deletePlan?: Maybe<Plan>;
   deleteUser?: Maybe<User>;
   deleteUserPlanNode?: Maybe<UserPlanNode>;
   updateComment?: Maybe<Comment>;
   updateHobby?: Maybe<Hobby>;
+  updateMatchNode?: Maybe<MatchNode>;
   updateNote?: Maybe<Note>;
   updatePlan?: Maybe<Plan>;
   updateUser?: Maybe<User>;
@@ -261,6 +311,11 @@ export type MutationCreateCommentArgs = {
 
 export type MutationCreateHobbyArgs = {
   input: CreateHobbyInput;
+};
+
+
+export type MutationCreateMatchNodeArgs = {
+  input: CreateMatchNodeInput;
 };
 
 
@@ -294,6 +349,11 @@ export type MutationDeleteHobbyArgs = {
 };
 
 
+export type MutationDeleteMatchNodeArgs = {
+  input: MutateMatchNodeInput;
+};
+
+
 export type MutationDeleteNoteArgs = {
   input: MutateNoteInput;
 };
@@ -321,6 +381,11 @@ export type MutationUpdateCommentArgs = {
 
 export type MutationUpdateHobbyArgs = {
   input: MutateHobbyInput;
+};
+
+
+export type MutationUpdateMatchNodeArgs = {
+  input: MutateMatchNodeInput;
 };
 
 
@@ -453,6 +518,7 @@ export type Query = {
   __typename?: 'Query';
   findComments: CommentResultList;
   findHobbies: HobbyResultList;
+  findMatchNodes: MatchNodeResultList;
   findNotes: NoteResultList;
   findPlans: PlanResultList;
   findUserPlanNodes: UserPlanNodeResultList;
@@ -460,6 +526,7 @@ export type Query = {
   getComment?: Maybe<Comment>;
   getDraftNotes?: Maybe<Array<Maybe<Note>>>;
   getHobby?: Maybe<Hobby>;
+  getMatchNode?: Maybe<MatchNode>;
   getNote?: Maybe<Note>;
   getPlan?: Maybe<Plan>;
   getUser?: Maybe<User>;
@@ -476,6 +543,13 @@ export type QueryFindCommentsArgs = {
 
 export type QueryFindHobbiesArgs = {
   filter?: Maybe<HobbyFilter>;
+  orderBy?: Maybe<OrderByInput>;
+  page?: Maybe<PageRequest>;
+};
+
+
+export type QueryFindMatchNodesArgs = {
+  filter?: Maybe<MatchNodeFilter>;
   orderBy?: Maybe<OrderByInput>;
   page?: Maybe<PageRequest>;
 };
@@ -515,6 +589,11 @@ export type QueryGetCommentArgs = {
 
 
 export type QueryGetHobbyArgs = {
+  id: Scalars['GraphbackObjectID'];
+};
+
+
+export type QueryGetMatchNodeArgs = {
   id: Scalars['GraphbackObjectID'];
 };
 
@@ -560,18 +639,21 @@ export type Subscription = {
   __typename?: 'Subscription';
   deletedComment: Comment;
   deletedHobby: Hobby;
+  deletedMatchNode: MatchNode;
   deletedNote: Note;
   deletedPlan: Plan;
   deletedUser: User;
   deletedUserPlanNode: UserPlanNode;
   newComment: Comment;
   newHobby: Hobby;
+  newMatchNode: MatchNode;
   newNote: Note;
   newPlan: Plan;
   newUser: User;
   newUserPlanNode: UserPlanNode;
   updatedComment: Comment;
   updatedHobby: Hobby;
+  updatedMatchNode: MatchNode;
   updatedNote: Note;
   updatedPlan: Plan;
   updatedUser: User;
@@ -586,6 +668,11 @@ export type SubscriptionDeletedCommentArgs = {
 
 export type SubscriptionDeletedHobbyArgs = {
   filter?: Maybe<HobbySubscriptionFilter>;
+};
+
+
+export type SubscriptionDeletedMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
 };
 
 
@@ -619,6 +706,11 @@ export type SubscriptionNewHobbyArgs = {
 };
 
 
+export type SubscriptionNewMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
+};
+
+
 export type SubscriptionNewNoteArgs = {
   filter?: Maybe<NoteSubscriptionFilter>;
 };
@@ -646,6 +738,11 @@ export type SubscriptionUpdatedCommentArgs = {
 
 export type SubscriptionUpdatedHobbyArgs = {
   filter?: Maybe<HobbySubscriptionFilter>;
+};
+
+
+export type SubscriptionUpdatedMatchNodeArgs = {
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
 };
 
 
@@ -679,21 +776,12 @@ export type User = {
   firstName: Scalars['String'];
   gender: Gender;
   /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
+   * @oneToMany(field: 'usersHobby', key: 'usersHobbyId')
+   * @oneToMany(field: 'usersHobby')
    */
   hobbies?: Maybe<Array<Maybe<Hobby>>>;
   lastName: Scalars['String'];
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  likes?: Maybe<Array<Maybe<User>>>;
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  matches?: Maybe<Array<Maybe<User>>>;
+  likes?: Maybe<Array<Maybe<Scalars['String']>>>;
   phoneNumber: Scalars['String'];
   photoUrl?: Maybe<Scalars['String']>;
   /**
@@ -701,13 +789,7 @@ export type User = {
    * @oneToMany(field: 'user')
    */
   plans?: Maybe<Array<Maybe<UserPlanNode>>>;
-  /**
-   * @oneToMany(field: 'users', key: 'usersId')
-   * @oneToMany(field: 'users')
-   */
-  rejected?: Maybe<Array<Maybe<User>>>;
-  /** @manyToOne(field: 'rejected', key: 'usersId') */
-  users?: Maybe<User>;
+  rejected?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -718,26 +800,8 @@ export type UserHobbiesArgs = {
 
 
 /** @model */
-export type UserLikesArgs = {
-  filter?: Maybe<UserFilter>;
-};
-
-
-/** @model */
-export type UserMatchesArgs = {
-  filter?: Maybe<UserFilter>;
-};
-
-
-/** @model */
 export type UserPlansArgs = {
   filter?: Maybe<UserPlanNodeFilter>;
-};
-
-
-/** @model */
-export type UserRejectedArgs = {
-  filter?: Maybe<UserFilter>;
 };
 
 export type UserFilter = {
@@ -750,11 +814,12 @@ export type UserFilter = {
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
   lastName?: Maybe<StringInput>;
+  likes?: Maybe<StringInput>;
   not?: Maybe<UserFilter>;
   or?: Maybe<Array<UserFilter>>;
   phoneNumber?: Maybe<StringInput>;
   photoUrl?: Maybe<StringInput>;
-  usersId?: Maybe<GraphbackObjectIdInput>;
+  rejected?: Maybe<StringInput>;
 };
 
 /** @model */
@@ -809,10 +874,12 @@ export type UserSubscriptionFilter = {
   firstName?: Maybe<StringInput>;
   gender?: Maybe<StringInput>;
   lastName?: Maybe<StringInput>;
+  likes?: Maybe<StringInput>;
   not?: Maybe<UserSubscriptionFilter>;
   or?: Maybe<Array<UserSubscriptionFilter>>;
   phoneNumber?: Maybe<StringInput>;
   photoUrl?: Maybe<StringInput>;
+  rejected?: Maybe<StringInput>;
 };
 
 export type GetDraftNotesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -862,39 +929,27 @@ export type HobbyFieldsFragment = (
 export type HobbyExpandedFieldsFragment = (
   { __typename?: 'Hobby' }
   & Pick<Hobby, '_id' | 'type' | 'rate' | 'unit' | 'total'>
-  & { users?: Maybe<(
+  & { usersHobby?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio' | 'likes' | 'rejected'>
   )> }
 );
 
 export type UserFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
+  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio' | 'likes' | 'rejected'>
 );
 
 export type UserExpandedFieldsFragment = (
   { __typename?: 'User' }
-  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
+  & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio' | 'likes' | 'rejected'>
   & { hobbies?: Maybe<Array<Maybe<(
     { __typename?: 'Hobby' }
     & Pick<Hobby, '_id' | 'type' | 'rate' | 'unit' | 'total'>
   )>>>, plans?: Maybe<Array<Maybe<(
     { __typename?: 'UserPlanNode' }
     & Pick<UserPlanNode, '_id'>
-  )>>>, matches?: Maybe<Array<Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
-  )>>>, likes?: Maybe<Array<Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
-  )>>>, rejected?: Maybe<Array<Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
-  )>>>, users?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
-  )> }
+  )>>> }
 );
 
 export type UserPlanNodeFieldsFragment = (
@@ -907,7 +962,7 @@ export type UserPlanNodeExpandedFieldsFragment = (
   & Pick<UserPlanNode, '_id'>
   & { user?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio'>
+    & Pick<User, '_id' | 'authId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'gender' | 'birthDate' | 'photoUrl' | 'bio' | 'likes' | 'rejected'>
   )>, plan?: Maybe<(
     { __typename?: 'Plan' }
     & Pick<Plan, '_id' | 'hobbyType' | 'venue' | 'address' | 'date'>
@@ -926,6 +981,16 @@ export type PlanExpandedFieldsFragment = (
     { __typename?: 'UserPlanNode' }
     & Pick<UserPlanNode, '_id'>
   )>>> }
+);
+
+export type MatchNodeFieldsFragment = (
+  { __typename?: 'MatchNode' }
+  & Pick<MatchNode, '_id' | 'user1' | 'user2'>
+);
+
+export type MatchNodeExpandedFieldsFragment = (
+  { __typename?: 'MatchNode' }
+  & Pick<MatchNode, '_id' | 'user1' | 'user2'>
 );
 
 export type FindNotesQueryVariables = Exact<{
@@ -1117,6 +1182,38 @@ export type GetPlanQuery = (
   & { getPlan?: Maybe<(
     { __typename?: 'Plan' }
     & PlanExpandedFieldsFragment
+  )> }
+);
+
+export type FindMatchNodesQueryVariables = Exact<{
+  filter?: Maybe<MatchNodeFilter>;
+  page?: Maybe<PageRequest>;
+  orderBy?: Maybe<OrderByInput>;
+}>;
+
+
+export type FindMatchNodesQuery = (
+  { __typename?: 'Query' }
+  & { findMatchNodes: (
+    { __typename?: 'MatchNodeResultList' }
+    & Pick<MatchNodeResultList, 'offset' | 'limit' | 'count'>
+    & { items: Array<Maybe<(
+      { __typename?: 'MatchNode' }
+      & MatchNodeExpandedFieldsFragment
+    )>> }
+  ) }
+);
+
+export type GetMatchNodeQueryVariables = Exact<{
+  id: Scalars['GraphbackObjectID'];
+}>;
+
+
+export type GetMatchNodeQuery = (
+  { __typename?: 'Query' }
+  & { getMatchNode?: Maybe<(
+    { __typename?: 'MatchNode' }
+    & MatchNodeExpandedFieldsFragment
   )> }
 );
 
@@ -1354,6 +1451,45 @@ export type DeletePlanMutation = (
   )> }
 );
 
+export type CreateMatchNodeMutationVariables = Exact<{
+  input: CreateMatchNodeInput;
+}>;
+
+
+export type CreateMatchNodeMutation = (
+  { __typename?: 'Mutation' }
+  & { createMatchNode?: Maybe<(
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  )> }
+);
+
+export type UpdateMatchNodeMutationVariables = Exact<{
+  input: MutateMatchNodeInput;
+}>;
+
+
+export type UpdateMatchNodeMutation = (
+  { __typename?: 'Mutation' }
+  & { updateMatchNode?: Maybe<(
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  )> }
+);
+
+export type DeleteMatchNodeMutationVariables = Exact<{
+  input: MutateMatchNodeInput;
+}>;
+
+
+export type DeleteMatchNodeMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteMatchNode?: Maybe<(
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  )> }
+);
+
 export type NewNoteSubscriptionVariables = Exact<{
   filter?: Maybe<NoteSubscriptionFilter>;
 }>;
@@ -1588,6 +1724,45 @@ export type DeletedPlanSubscription = (
   ) }
 );
 
+export type NewMatchNodeSubscriptionVariables = Exact<{
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
+}>;
+
+
+export type NewMatchNodeSubscription = (
+  { __typename?: 'Subscription' }
+  & { newMatchNode: (
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  ) }
+);
+
+export type UpdatedMatchNodeSubscriptionVariables = Exact<{
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
+}>;
+
+
+export type UpdatedMatchNodeSubscription = (
+  { __typename?: 'Subscription' }
+  & { updatedMatchNode: (
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  ) }
+);
+
+export type DeletedMatchNodeSubscriptionVariables = Exact<{
+  filter?: Maybe<MatchNodeSubscriptionFilter>;
+}>;
+
+
+export type DeletedMatchNodeSubscription = (
+  { __typename?: 'Subscription' }
+  & { deletedMatchNode: (
+    { __typename?: 'MatchNode' }
+    & MatchNodeFieldsFragment
+  ) }
+);
+
 export const NoteFieldsFragmentDoc = gql`
     fragment NoteFields on Note {
   _id
@@ -1642,7 +1817,7 @@ export const HobbyExpandedFieldsFragmentDoc = gql`
   rate
   unit
   total
-  users {
+  usersHobby {
     _id
     authId
     firstName
@@ -1653,6 +1828,8 @@ export const HobbyExpandedFieldsFragmentDoc = gql`
     birthDate
     photoUrl
     bio
+    likes
+    rejected
   }
 }
     `;
@@ -1668,6 +1845,8 @@ export const UserFieldsFragmentDoc = gql`
   birthDate
   photoUrl
   bio
+  likes
+  rejected
 }
     `;
 export const UserExpandedFieldsFragmentDoc = gql`
@@ -1692,54 +1871,8 @@ export const UserExpandedFieldsFragmentDoc = gql`
   plans {
     _id
   }
-  matches {
-    _id
-    authId
-    firstName
-    lastName
-    email
-    phoneNumber
-    gender
-    birthDate
-    photoUrl
-    bio
-  }
-  likes {
-    _id
-    authId
-    firstName
-    lastName
-    email
-    phoneNumber
-    gender
-    birthDate
-    photoUrl
-    bio
-  }
-  rejected {
-    _id
-    authId
-    firstName
-    lastName
-    email
-    phoneNumber
-    gender
-    birthDate
-    photoUrl
-    bio
-  }
-  users {
-    _id
-    authId
-    firstName
-    lastName
-    email
-    phoneNumber
-    gender
-    birthDate
-    photoUrl
-    bio
-  }
+  likes
+  rejected
 }
     `;
 export const UserPlanNodeFieldsFragmentDoc = gql`
@@ -1761,6 +1894,8 @@ export const UserPlanNodeExpandedFieldsFragmentDoc = gql`
     birthDate
     photoUrl
     bio
+    likes
+    rejected
   }
   plan {
     _id
@@ -1790,6 +1925,20 @@ export const PlanExpandedFieldsFragmentDoc = gql`
   venue
   address
   date
+}
+    `;
+export const MatchNodeFieldsFragmentDoc = gql`
+    fragment MatchNodeFields on MatchNode {
+  _id
+  user1
+  user2
+}
+    `;
+export const MatchNodeExpandedFieldsFragmentDoc = gql`
+    fragment MatchNodeExpandedFields on MatchNode {
+  _id
+  user1
+  user2
 }
     `;
 export const GetDraftNotesDocument = gql`
@@ -2262,6 +2411,79 @@ export function useGetPlanLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
 export type GetPlanQueryHookResult = ReturnType<typeof useGetPlanQuery>;
 export type GetPlanLazyQueryHookResult = ReturnType<typeof useGetPlanLazyQuery>;
 export type GetPlanQueryResult = Apollo.QueryResult<GetPlanQuery, GetPlanQueryVariables>;
+export const FindMatchNodesDocument = gql`
+    query findMatchNodes($filter: MatchNodeFilter, $page: PageRequest, $orderBy: OrderByInput) {
+  findMatchNodes(filter: $filter, page: $page, orderBy: $orderBy) {
+    items {
+      ...MatchNodeExpandedFields
+    }
+    offset
+    limit
+    count
+  }
+}
+    ${MatchNodeExpandedFieldsFragmentDoc}`;
+
+/**
+ * __useFindMatchNodesQuery__
+ *
+ * To run a query within a React component, call `useFindMatchNodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindMatchNodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindMatchNodesQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      page: // value for 'page'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useFindMatchNodesQuery(baseOptions?: Apollo.QueryHookOptions<FindMatchNodesQuery, FindMatchNodesQueryVariables>) {
+        return Apollo.useQuery<FindMatchNodesQuery, FindMatchNodesQueryVariables>(FindMatchNodesDocument, baseOptions);
+      }
+export function useFindMatchNodesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindMatchNodesQuery, FindMatchNodesQueryVariables>) {
+          return Apollo.useLazyQuery<FindMatchNodesQuery, FindMatchNodesQueryVariables>(FindMatchNodesDocument, baseOptions);
+        }
+export type FindMatchNodesQueryHookResult = ReturnType<typeof useFindMatchNodesQuery>;
+export type FindMatchNodesLazyQueryHookResult = ReturnType<typeof useFindMatchNodesLazyQuery>;
+export type FindMatchNodesQueryResult = Apollo.QueryResult<FindMatchNodesQuery, FindMatchNodesQueryVariables>;
+export const GetMatchNodeDocument = gql`
+    query getMatchNode($id: GraphbackObjectID!) {
+  getMatchNode(id: $id) {
+    ...MatchNodeExpandedFields
+  }
+}
+    ${MatchNodeExpandedFieldsFragmentDoc}`;
+
+/**
+ * __useGetMatchNodeQuery__
+ *
+ * To run a query within a React component, call `useGetMatchNodeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMatchNodeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMatchNodeQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMatchNodeQuery(baseOptions: Apollo.QueryHookOptions<GetMatchNodeQuery, GetMatchNodeQueryVariables>) {
+        return Apollo.useQuery<GetMatchNodeQuery, GetMatchNodeQueryVariables>(GetMatchNodeDocument, baseOptions);
+      }
+export function useGetMatchNodeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMatchNodeQuery, GetMatchNodeQueryVariables>) {
+          return Apollo.useLazyQuery<GetMatchNodeQuery, GetMatchNodeQueryVariables>(GetMatchNodeDocument, baseOptions);
+        }
+export type GetMatchNodeQueryHookResult = ReturnType<typeof useGetMatchNodeQuery>;
+export type GetMatchNodeLazyQueryHookResult = ReturnType<typeof useGetMatchNodeLazyQuery>;
+export type GetMatchNodeQueryResult = Apollo.QueryResult<GetMatchNodeQuery, GetMatchNodeQueryVariables>;
 export const CreateNoteDocument = gql`
     mutation createNote($input: CreateNoteInput!) {
   createNote(input: $input) {
@@ -2838,6 +3060,102 @@ export function useDeletePlanMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeletePlanMutationHookResult = ReturnType<typeof useDeletePlanMutation>;
 export type DeletePlanMutationResult = Apollo.MutationResult<DeletePlanMutation>;
 export type DeletePlanMutationOptions = Apollo.BaseMutationOptions<DeletePlanMutation, DeletePlanMutationVariables>;
+export const CreateMatchNodeDocument = gql`
+    mutation createMatchNode($input: CreateMatchNodeInput!) {
+  createMatchNode(input: $input) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+export type CreateMatchNodeMutationFn = Apollo.MutationFunction<CreateMatchNodeMutation, CreateMatchNodeMutationVariables>;
+
+/**
+ * __useCreateMatchNodeMutation__
+ *
+ * To run a mutation, you first call `useCreateMatchNodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMatchNodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMatchNodeMutation, { data, loading, error }] = useCreateMatchNodeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateMatchNodeMutation(baseOptions?: Apollo.MutationHookOptions<CreateMatchNodeMutation, CreateMatchNodeMutationVariables>) {
+        return Apollo.useMutation<CreateMatchNodeMutation, CreateMatchNodeMutationVariables>(CreateMatchNodeDocument, baseOptions);
+      }
+export type CreateMatchNodeMutationHookResult = ReturnType<typeof useCreateMatchNodeMutation>;
+export type CreateMatchNodeMutationResult = Apollo.MutationResult<CreateMatchNodeMutation>;
+export type CreateMatchNodeMutationOptions = Apollo.BaseMutationOptions<CreateMatchNodeMutation, CreateMatchNodeMutationVariables>;
+export const UpdateMatchNodeDocument = gql`
+    mutation updateMatchNode($input: MutateMatchNodeInput!) {
+  updateMatchNode(input: $input) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+export type UpdateMatchNodeMutationFn = Apollo.MutationFunction<UpdateMatchNodeMutation, UpdateMatchNodeMutationVariables>;
+
+/**
+ * __useUpdateMatchNodeMutation__
+ *
+ * To run a mutation, you first call `useUpdateMatchNodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMatchNodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMatchNodeMutation, { data, loading, error }] = useUpdateMatchNodeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateMatchNodeMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMatchNodeMutation, UpdateMatchNodeMutationVariables>) {
+        return Apollo.useMutation<UpdateMatchNodeMutation, UpdateMatchNodeMutationVariables>(UpdateMatchNodeDocument, baseOptions);
+      }
+export type UpdateMatchNodeMutationHookResult = ReturnType<typeof useUpdateMatchNodeMutation>;
+export type UpdateMatchNodeMutationResult = Apollo.MutationResult<UpdateMatchNodeMutation>;
+export type UpdateMatchNodeMutationOptions = Apollo.BaseMutationOptions<UpdateMatchNodeMutation, UpdateMatchNodeMutationVariables>;
+export const DeleteMatchNodeDocument = gql`
+    mutation deleteMatchNode($input: MutateMatchNodeInput!) {
+  deleteMatchNode(input: $input) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+export type DeleteMatchNodeMutationFn = Apollo.MutationFunction<DeleteMatchNodeMutation, DeleteMatchNodeMutationVariables>;
+
+/**
+ * __useDeleteMatchNodeMutation__
+ *
+ * To run a mutation, you first call `useDeleteMatchNodeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteMatchNodeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteMatchNodeMutation, { data, loading, error }] = useDeleteMatchNodeMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useDeleteMatchNodeMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMatchNodeMutation, DeleteMatchNodeMutationVariables>) {
+        return Apollo.useMutation<DeleteMatchNodeMutation, DeleteMatchNodeMutationVariables>(DeleteMatchNodeDocument, baseOptions);
+      }
+export type DeleteMatchNodeMutationHookResult = ReturnType<typeof useDeleteMatchNodeMutation>;
+export type DeleteMatchNodeMutationResult = Apollo.MutationResult<DeleteMatchNodeMutation>;
+export type DeleteMatchNodeMutationOptions = Apollo.BaseMutationOptions<DeleteMatchNodeMutation, DeleteMatchNodeMutationVariables>;
 export const NewNoteDocument = gql`
     subscription newNote($filter: NoteSubscriptionFilter) {
   newNote(filter: $filter) {
@@ -3360,3 +3678,90 @@ export function useDeletedPlanSubscription(baseOptions?: Apollo.SubscriptionHook
       }
 export type DeletedPlanSubscriptionHookResult = ReturnType<typeof useDeletedPlanSubscription>;
 export type DeletedPlanSubscriptionResult = Apollo.SubscriptionResult<DeletedPlanSubscription>;
+export const NewMatchNodeDocument = gql`
+    subscription newMatchNode($filter: MatchNodeSubscriptionFilter) {
+  newMatchNode(filter: $filter) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+
+/**
+ * __useNewMatchNodeSubscription__
+ *
+ * To run a query within a React component, call `useNewMatchNodeSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useNewMatchNodeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNewMatchNodeSubscription({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useNewMatchNodeSubscription(baseOptions?: Apollo.SubscriptionHookOptions<NewMatchNodeSubscription, NewMatchNodeSubscriptionVariables>) {
+        return Apollo.useSubscription<NewMatchNodeSubscription, NewMatchNodeSubscriptionVariables>(NewMatchNodeDocument, baseOptions);
+      }
+export type NewMatchNodeSubscriptionHookResult = ReturnType<typeof useNewMatchNodeSubscription>;
+export type NewMatchNodeSubscriptionResult = Apollo.SubscriptionResult<NewMatchNodeSubscription>;
+export const UpdatedMatchNodeDocument = gql`
+    subscription updatedMatchNode($filter: MatchNodeSubscriptionFilter) {
+  updatedMatchNode(filter: $filter) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+
+/**
+ * __useUpdatedMatchNodeSubscription__
+ *
+ * To run a query within a React component, call `useUpdatedMatchNodeSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useUpdatedMatchNodeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUpdatedMatchNodeSubscription({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useUpdatedMatchNodeSubscription(baseOptions?: Apollo.SubscriptionHookOptions<UpdatedMatchNodeSubscription, UpdatedMatchNodeSubscriptionVariables>) {
+        return Apollo.useSubscription<UpdatedMatchNodeSubscription, UpdatedMatchNodeSubscriptionVariables>(UpdatedMatchNodeDocument, baseOptions);
+      }
+export type UpdatedMatchNodeSubscriptionHookResult = ReturnType<typeof useUpdatedMatchNodeSubscription>;
+export type UpdatedMatchNodeSubscriptionResult = Apollo.SubscriptionResult<UpdatedMatchNodeSubscription>;
+export const DeletedMatchNodeDocument = gql`
+    subscription deletedMatchNode($filter: MatchNodeSubscriptionFilter) {
+  deletedMatchNode(filter: $filter) {
+    ...MatchNodeFields
+  }
+}
+    ${MatchNodeFieldsFragmentDoc}`;
+
+/**
+ * __useDeletedMatchNodeSubscription__
+ *
+ * To run a query within a React component, call `useDeletedMatchNodeSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useDeletedMatchNodeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDeletedMatchNodeSubscription({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useDeletedMatchNodeSubscription(baseOptions?: Apollo.SubscriptionHookOptions<DeletedMatchNodeSubscription, DeletedMatchNodeSubscriptionVariables>) {
+        return Apollo.useSubscription<DeletedMatchNodeSubscription, DeletedMatchNodeSubscriptionVariables>(DeletedMatchNodeDocument, baseOptions);
+      }
+export type DeletedMatchNodeSubscriptionHookResult = ReturnType<typeof useDeletedMatchNodeSubscription>;
+export type DeletedMatchNodeSubscriptionResult = Apollo.SubscriptionResult<DeletedMatchNodeSubscription>;

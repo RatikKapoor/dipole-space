@@ -53,7 +53,12 @@ input CreateHobbyInput {
   rate: Int!
   unit: String!
   total: Int
-  usersId: GraphbackObjectID
+  usersHobbyId: GraphbackObjectID
+}
+
+input CreateMatchNodeInput {
+  user1: String!
+  user2: String!
 }
 
 input CreateNoteInput {
@@ -78,7 +83,8 @@ input CreateUserInput {
   birthDate: String!
   photoUrl: String
   bio: String
-  usersId: GraphbackObjectID
+  likes: [String]
+  rejected: [String]
 }
 
 input CreateUserPlanNodeInput {
@@ -113,8 +119,8 @@ type Hobby {
   unit: String!
   total: Int
 
-  """@manyToOne(field: 'hobbies', key: 'usersId')"""
-  users: User
+  """@manyToOne(field: 'hobbies', key: 'usersHobbyId')"""
+  usersHobby: User
 }
 
 input HobbyFilter {
@@ -123,7 +129,7 @@ input HobbyFilter {
   rate: IntInput
   unit: StringInput
   total: IntInput
-  usersId: GraphbackObjectIDInput
+  usersHobbyId: GraphbackObjectIDInput
   and: [HobbyFilter!]
   or: [HobbyFilter!]
   not: HobbyFilter
@@ -171,6 +177,38 @@ input IntInput {
   between: [Int!]
 }
 
+"""@model"""
+type MatchNode {
+  _id: GraphbackObjectID!
+  user1: String!
+  user2: String!
+}
+
+input MatchNodeFilter {
+  _id: GraphbackObjectIDInput
+  user1: StringInput
+  user2: StringInput
+  and: [MatchNodeFilter!]
+  or: [MatchNodeFilter!]
+  not: MatchNodeFilter
+}
+
+type MatchNodeResultList {
+  items: [MatchNode]!
+  offset: Int
+  limit: Int
+  count: Int
+}
+
+input MatchNodeSubscriptionFilter {
+  and: [MatchNodeSubscriptionFilter!]
+  or: [MatchNodeSubscriptionFilter!]
+  not: MatchNodeSubscriptionFilter
+  _id: GraphbackObjectIDInput
+  user1: StringInput
+  user2: StringInput
+}
+
 input MutateCommentInput {
   _id: GraphbackObjectID!
   text: String
@@ -184,7 +222,13 @@ input MutateHobbyInput {
   rate: Int
   unit: String
   total: Int
-  usersId: GraphbackObjectID
+  usersHobbyId: GraphbackObjectID
+}
+
+input MutateMatchNodeInput {
+  _id: GraphbackObjectID!
+  user1: String
+  user2: String
 }
 
 input MutateNoteInput {
@@ -212,7 +256,8 @@ input MutateUserInput {
   birthDate: String
   photoUrl: String
   bio: String
-  usersId: GraphbackObjectID
+  likes: [String]
+  rejected: [String]
 }
 
 input MutateUserPlanNodeInput {
@@ -240,6 +285,9 @@ type Mutation {
   createUserPlanNode(input: CreateUserPlanNodeInput!): UserPlanNode
   updateUserPlanNode(input: MutateUserPlanNodeInput!): UserPlanNode
   deleteUserPlanNode(input: MutateUserPlanNodeInput!): UserPlanNode
+  createMatchNode(input: CreateMatchNodeInput!): MatchNode
+  updateMatchNode(input: MutateMatchNodeInput!): MatchNode
+  deleteMatchNode(input: MutateMatchNodeInput!): MatchNode
 }
 
 """@model"""
@@ -348,6 +396,8 @@ type Query {
   findPlans(filter: PlanFilter, page: PageRequest, orderBy: OrderByInput): PlanResultList!
   getUserPlanNode(id: GraphbackObjectID!): UserPlanNode
   findUserPlanNodes(filter: UserPlanNodeFilter, page: PageRequest, orderBy: OrderByInput): UserPlanNodeResultList!
+  getMatchNode(id: GraphbackObjectID!): MatchNode
+  findMatchNodes(filter: MatchNodeFilter, page: PageRequest, orderBy: OrderByInput): MatchNodeResultList!
 }
 
 enum SortDirectionEnum {
@@ -387,6 +437,9 @@ type Subscription {
   newUserPlanNode(filter: UserPlanNodeSubscriptionFilter): UserPlanNode!
   updatedUserPlanNode(filter: UserPlanNodeSubscriptionFilter): UserPlanNode!
   deletedUserPlanNode(filter: UserPlanNodeSubscriptionFilter): UserPlanNode!
+  newMatchNode(filter: MatchNodeSubscriptionFilter): MatchNode!
+  updatedMatchNode(filter: MatchNodeSubscriptionFilter): MatchNode!
+  deletedMatchNode(filter: MatchNodeSubscriptionFilter): MatchNode!
 }
 
 """@model"""
@@ -403,8 +456,8 @@ type User {
   bio: String
 
   """
-  @oneToMany(field: 'users', key: 'usersId')
-  @oneToMany(field: 'users')
+  @oneToMany(field: 'usersHobby', key: 'usersHobbyId')
+  @oneToMany(field: 'usersHobby')
   """
   hobbies(filter: HobbyFilter): [Hobby]
 
@@ -413,27 +466,8 @@ type User {
   @oneToMany(field: 'user')
   """
   plans(filter: UserPlanNodeFilter): [UserPlanNode]
-
-  """
-  @oneToMany(field: 'users', key: 'usersId')
-  @oneToMany(field: 'users')
-  """
-  matches(filter: UserFilter): [User]
-
-  """
-  @oneToMany(field: 'users', key: 'usersId')
-  @oneToMany(field: 'users')
-  """
-  likes(filter: UserFilter): [User]
-
-  """
-  @oneToMany(field: 'users', key: 'usersId')
-  @oneToMany(field: 'users')
-  """
-  rejected(filter: UserFilter): [User]
-
-  """@manyToOne(field: 'rejected', key: 'usersId')"""
-  users: User
+  likes: [String]
+  rejected: [String]
 }
 
 input UserFilter {
@@ -447,7 +481,8 @@ input UserFilter {
   birthDate: StringInput
   photoUrl: StringInput
   bio: StringInput
-  usersId: GraphbackObjectIDInput
+  likes: StringInput
+  rejected: StringInput
   and: [UserFilter!]
   or: [UserFilter!]
   not: UserFilter
@@ -508,4 +543,6 @@ input UserSubscriptionFilter {
   birthDate: StringInput
   photoUrl: StringInput
   bio: StringInput
+  likes: StringInput
+  rejected: StringInput
 }

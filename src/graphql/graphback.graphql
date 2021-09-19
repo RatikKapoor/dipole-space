@@ -49,7 +49,7 @@ fragment HobbyExpandedFields on Hobby {
    rate
    unit
    total
-   users {
+   usersHobby {
       _id
       authId
       firstName
@@ -60,6 +60,8 @@ fragment HobbyExpandedFields on Hobby {
       birthDate
       photoUrl
       bio
+      likes
+      rejected
    }
 }
 
@@ -74,6 +76,8 @@ fragment UserFields on User {
    birthDate
    photoUrl
    bio
+   likes
+   rejected
 
 }
 
@@ -97,55 +101,9 @@ fragment UserExpandedFields on User {
    }
    plans {
       _id
-   }
-   matches {
-      _id
-      authId
-      firstName
-      lastName
-      email
-      phoneNumber
-      gender
-      birthDate
-      photoUrl
-      bio
-   }
-   likes {
-      _id
-      authId
-      firstName
-      lastName
-      email
-      phoneNumber
-      gender
-      birthDate
-      photoUrl
-      bio
-   }
-   rejected {
-      _id
-      authId
-      firstName
-      lastName
-      email
-      phoneNumber
-      gender
-      birthDate
-      photoUrl
-      bio
-   }
-   users {
-      _id
-      authId
-      firstName
-      lastName
-      email
-      phoneNumber
-      gender
-      birthDate
-      photoUrl
-      bio
-   }
+   }   likes
+   rejected
+
 }
 
 fragment UserPlanNodeFields on UserPlanNode {
@@ -166,6 +124,8 @@ fragment UserPlanNodeExpandedFields on UserPlanNode {
       birthDate
       photoUrl
       bio
+      likes
+      rejected
    }
    plan {
       _id
@@ -193,6 +153,20 @@ fragment PlanExpandedFields on Plan {
    venue
    address
    date
+
+}
+
+fragment MatchNodeFields on MatchNode {
+   _id
+   user1
+   user2
+
+}
+
+fragment MatchNodeExpandedFields on MatchNode {
+   _id
+   user1
+   user2
 
 }
 
@@ -295,6 +269,23 @@ query findPlans($filter: PlanFilter, $page: PageRequest, $orderBy: OrderByInput)
 query getPlan($id: GraphbackObjectID!) {
     getPlan(id: $id) {
       ...PlanExpandedFields
+    }
+}
+
+query findMatchNodes($filter: MatchNodeFilter, $page: PageRequest, $orderBy: OrderByInput) {
+    findMatchNodes(filter: $filter, page: $page, orderBy: $orderBy) {
+      items {
+        ...MatchNodeExpandedFields
+      }
+      offset
+      limit
+      count
+    }
+}
+
+query getMatchNode($id: GraphbackObjectID!) {
+    getMatchNode(id: $id) {
+      ...MatchNodeExpandedFields
     }
 }
 
@@ -406,6 +397,24 @@ mutation deletePlan($input: MutatePlanInput!) {
   }
 }
 
+mutation createMatchNode($input: CreateMatchNodeInput!) {
+  createMatchNode(input: $input) {
+      ...MatchNodeFields
+  }
+}
+
+mutation updateMatchNode($input: MutateMatchNodeInput!) {
+  updateMatchNode(input: $input) {
+      ...MatchNodeFields
+  }
+}
+
+mutation deleteMatchNode($input: MutateMatchNodeInput!) {
+  deleteMatchNode(input: $input) {
+      ...MatchNodeFields
+  }
+}
+
 subscription newNote($filter: NoteSubscriptionFilter) {
   newNote(filter: $filter) {
       ...NoteFields
@@ -511,5 +520,23 @@ subscription updatedPlan($filter: PlanSubscriptionFilter) {
 subscription deletedPlan($filter: PlanSubscriptionFilter) {
   deletedPlan(filter: $filter) {
       ...PlanFields
+  }
+}
+
+subscription newMatchNode($filter: MatchNodeSubscriptionFilter) {
+  newMatchNode(filter: $filter) {
+      ...MatchNodeFields
+  }
+}
+
+subscription updatedMatchNode($filter: MatchNodeSubscriptionFilter) {
+  updatedMatchNode(filter: $filter) {
+      ...MatchNodeFields
+  }
+}
+
+subscription deletedMatchNode($filter: MatchNodeSubscriptionFilter) {
+  deletedMatchNode(filter: $filter) {
+      ...MatchNodeFields
   }
 }
