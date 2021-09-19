@@ -1,5 +1,7 @@
 # Dipole.space
 
+![Main Baner](https://i.imgur.com/eZgQZal.png)
+
 ## Inspiration
 
 Our irreplaceable bonds bring us refuge in the most turbulent times. Dipole arose out of the quintessential human wish to connect with others. Our team was no exception. One of the things we missed the most were those simple connections that blossomed into rich and rewarding friendships from just a shared common interest.
