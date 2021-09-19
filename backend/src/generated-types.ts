@@ -699,7 +699,12 @@ export type User = {
    * @oneToMany(field: 'user')
    */
   plans?: Maybe<Array<Maybe<UserPlanNode>>>;
-  /** @manyToOne(field: 'likes', key: 'usersId') */
+  /**
+   * @oneToMany(field: 'users', key: 'usersId')
+   * @oneToMany(field: 'users')
+   */
+  rejected?: Maybe<Array<Maybe<User>>>;
+  /** @manyToOne(field: 'rejected', key: 'usersId') */
   users?: Maybe<User>;
 };
 
@@ -725,6 +730,12 @@ export type UserMatchesArgs = {
 /** @model */
 export type UserPlansArgs = {
   filter?: Maybe<UserPlanNodeFilter>;
+};
+
+
+/** @model */
+export type UserRejectedArgs = {
+  filter?: Maybe<UserFilter>;
 };
 
 export type UserFilter = {
