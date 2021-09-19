@@ -7,6 +7,8 @@ import {
     createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { ChevronLeft } from "@mui/icons-material";
+import darkBlueWaves from '../styles/vectors/dark-blue-waves.svg'
+import lightBlueWaves from '../styles/vectors/light-blue-waves.svg'
 
 export const SignUp: React.FC = () => {
     const auth = getAuth()
@@ -68,7 +70,7 @@ export const SignUp: React.FC = () => {
                     <p>Back</p>
                 </div>
             }
-            <div className="auth-header">
+            <div className={`auth-header ${signUpPage === 2 && 'less-margin'}`}>
                 <h2>Create an account</h2>
             </div>
             <div className="auth-fields">
@@ -147,7 +149,8 @@ export const SignUp: React.FC = () => {
                         Create Account
                     </Button>
             }
-
+            <img className={`footer-waves dark-waves ${signUpPage === 2 && 'shorter'}`} src={darkBlueWaves}/>
+            { signUpPage === 1 && <img className="footer-waves light-waves" src={lightBlueWaves}/>}
         </div>
     )
 }

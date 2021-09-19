@@ -11,6 +11,8 @@ import {
 import { useAppDispatch } from "../app/hooks";
 import { setUser } from "../features/user/userSlice";
 import { useHistory } from "react-router-dom";
+import darkBlueWaves from '../styles/vectors/dark-blue-waves.svg'
+import lightBlueWaves from '../styles/vectors/light-blue-waves.svg'
 
 export const Login: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -98,6 +100,8 @@ export const Login: React.FC = () => {
             >
                 <Alert severity="error">Failed to login, please check your input and try again</Alert>
             </Snackbar>
+            <img className="footer-waves dark-waves" src={darkBlueWaves}/>
+            <img className="footer-waves light-waves" src={lightBlueWaves} />
         </div>
     )
 }
