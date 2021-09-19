@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Container, FormControlLabel, TextField } from "@mui/material";
+import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Snackbar, TextField } from "@mui/material";
 import React, { useState } from "react";
 import {
     getAuth,
@@ -10,12 +10,15 @@ import {
 } from "../generated-types"
 import { useAppDispatch } from "../app/hooks";
 import { setUser } from "../features/user/userSlice";
+import { useHistory } from "react-router-dom";
 
 export const Login: React.FC = () => {
     const dispatch = useAppDispatch()
+    const history = useHistory()
 
-    const [emailAddress, setEmailAddresss] = useState<string>("")
+    const [emailAddress, setEmailAddress] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [showError, setShowError] = useState(false)
     const findUsersQuery = useFindUsersQuery()
 
     const loginUser = async (
@@ -34,6 +37,7 @@ export const Login: React.FC = () => {
             return user;
         } catch (e) {
             console.error("Caught error: ", e);
+            setShowError(true)
             return null;
         }
     };
@@ -47,16 +51,22 @@ export const Login: React.FC = () => {
         if (!res) return
 
         dispatch(setUser(res))
+
+        history.push("/home")
     }
 
     return (
-        <Container className="login-screen">
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <div className=" auth-screen login-screen">
+            <div className="auth-header">
+                <h2>Log in</h2>
+            </div>
+            <div className="auth-fields">
                 <TextField
                     label="Email Address"
                     name="email"
                     value={emailAddress}
-                    onChange={e => setEmailAddresss(e.target.value)}
+                    onChange={e => setEmailAddress(e.target.value)}
+                    className="login-field email-field"
                 />
                 <TextField
                     label="Password"
@@ -64,23 +74,30 @@ export const Login: React.FC = () => {
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    className="auth-field password-field"
                 />
-                <FormControlLabel
-                    control={<Checkbox value="rembember" color="primary" />}
-                    label="Remember me"
-                />
-            </Box>
-            <Box>
+            </div>
+            <div className="login-button">
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     onClick={handleSubmit}
-                    className="login-button"
+                    className="auth-button"
                 >
-                    Sign In
+                    Log in
                 </Button>
-            </Box>
-        </Container>
+            </div>
+            <div className="signup-text">
+                <p>Not registered? <span className="signup-link" onClick={() => history.push("/signup")}>Sign Up</span></p>
+            </div>
+            <Snackbar
+                open={showError}
+                autoHideDuration={10000}
+                onClose={() => setShowError(false)}
+            >
+                <Alert severity="error">Failed to login, please check your input and try again</Alert>
+            </Snackbar>
+        </div>
     )
 }
