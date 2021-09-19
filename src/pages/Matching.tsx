@@ -4,7 +4,8 @@ import splash from "../styles/vectors/matching-splash.svg"
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { Close, FavoriteRounded, Star } from "@mui/icons-material";
+import IconButton from "@mui/material/IconButton"
+import { ArrowBack, FavoriteRounded, Star } from "@mui/icons-material";
 
 const name = "Matthew";
 const gender = "Female";
@@ -74,7 +75,10 @@ const FuturePlans: React.FC = () => {
 export const Matching: React.FC = () => {
   return (
     <div className="page">
-      <Container maxWidth="xs">
+      <Container>
+      <IconButton>
+        <ArrowBack />
+      </IconButton>
         <Introduction />
         <div className="splash-container">
           <img src={splash} className="splash" />
