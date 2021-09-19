@@ -12,13 +12,10 @@ import { ChatWindow } from "./pages/ChatWindow";
 import { PrivateRoute } from "./components/common/PrivateRoute";
 import { Landing } from "./pages/Landing";
 import { HobbySelect } from "./pages/HobbySelect";
-<<<<<<< HEAD
 import { useFindUsersQuery, User as UserData } from "./generated-types";
 import { setUser } from "./features/user/userSlice";
 import { useAppDispatch } from "./app/hooks";
-=======
 import { StartMatching } from "./pages/StartMatching";
->>>>>>> 6323de9 (Co-authored-by: Ratik Kapoor <ratikrk@gmail.com>)
 
 const App: React.FC = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined)

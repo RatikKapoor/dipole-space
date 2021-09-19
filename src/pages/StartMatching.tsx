@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { RootState } from "../app/store";
 import { useSelector } from "react-redux";
