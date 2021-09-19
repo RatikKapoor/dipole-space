@@ -20,9 +20,15 @@ export const ChatWindow: React.FC = () => {
         </div>
         <div className="message-compose">
           <div className="compose-container">
-            <div className="take-picture"></div>
-            <div></div>
-            <div className="upload-image"></div>
+            <div className="take-picture">
+
+            </div>
+            <div>
+
+            </div>
+            <div className="upload-image">
+
+            </div>
           </div>
         </div>
       </div>

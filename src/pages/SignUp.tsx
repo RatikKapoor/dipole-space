@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
-import { Box, Button, Container, TextField } from "@mui/material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useCreateUserMutation, CreateUserInput, Gender } from '../generated-types'
 import {
     getAuth,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { ChevronLeft } from "@mui/icons-material";
 
 export const SignUp: React.FC = () => {
     const auth = getAuth()
@@ -14,9 +15,9 @@ export const SignUp: React.FC = () => {
     const [firstName, setFirstName] = useState<string>("")
     const [lastName, setLastName] = useState<string>("")
     const [phoneNumber, setPhoneNumber] = useState<string>("")
-    const [gender] = useState<Gender>(Gender.Male)
+    const [gender, setGender] = useState<Gender>(Gender.Male)
     const [birthDay, setBirthDay] = useState<string>("")
-    const [photoUrl, setPhotoUrl] = useState<string>("")
+    const [photoUrl] = useState<string>("")
     const [bio, setBio] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -61,6 +62,12 @@ export const SignUp: React.FC = () => {
 
     return (
         <div className="auth-screen signup-screen">
+            {signUpPage === 2 &&
+                <div className="auth-back" onClick={() => setSignUpPage(1)}>
+                    <ChevronLeft />
+                    <p>Back</p>
+                </div>
+            }
             <div className="auth-header">
                 <h2>Create an account</h2>
             </div>
@@ -76,6 +83,7 @@ export const SignUp: React.FC = () => {
                             />
                             <TextField
                                 label="Password"
+                                type="password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                             />
@@ -107,25 +115,18 @@ export const SignUp: React.FC = () => {
                                 value={bio}
                                 onChange={e => setBio(e.target.value)}
                             />
+                            <Select
+                                label="Gender"
+                                onChange={e => setGender((e.target.value as Gender))}
+                                value={gender}
+                            >
+                                <MenuItem value={Gender.Female}>{Gender.Female.toString()}</MenuItem>
+                                <MenuItem value={Gender.Male}>{Gender.Male.toString()}</MenuItem>
+                                <MenuItem value={Gender.Other}>{Gender.Other.toString()}</MenuItem>
+                            </Select>
                         </>
                 }
             </div>
-            <Box>
-
-                {/* <TextField
-                    label="Photo Url"
-                    value={photoUrl}
-                    onChange={e => setPhotoUrl(e.target.value)}
-                /> */}
-
-                {/* <Select
-                    label="Gender"
-                >
-                    <MenuItem value={"female"}>Female</MenuItem>
-                    <MenuItem value={"male"}>Male</MenuItem>
-                    <MenuItem value={"other"}>Other</MenuItem>
-                </Select> */}
-            </Box>
             {
                 signUpPage === 1 ?
                     <Button

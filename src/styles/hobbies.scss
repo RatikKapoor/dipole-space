@@ -1,0 +1,16 @@
+@import "./colors.scss";
+
+.hobby-selection-page {
+  display: flex;
+  flex-direction: column;
+  .hobbies-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .hobby-selector {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
