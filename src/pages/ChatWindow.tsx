@@ -43,7 +43,7 @@ export const ChatWindow: React.FC = () => {
 
   const sendMessage = async (): Promise<void> => {
     if (user === undefined || user === null || match === null || match === undefined) return;
-    const docRef = await addDoc(collection(db, "messages").withConverter(messageConverter), {
+    await addDoc(collection(db, "messages").withConverter(messageConverter), {
       message: composeMessageText,
       sentBy: user._id,
       sentTo: match._id,
