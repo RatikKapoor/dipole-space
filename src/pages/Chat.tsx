@@ -7,6 +7,7 @@ import { selectUser } from "../features/user/userSlice";
 import { Message, messageConverter } from "../models/message";
 import { useFindMatchNodesQuery, useFindUsersQuery, User } from "../generated-types";
 import { useHistory } from "react-router";
+import messagesTopWaves from '../styles/vectors/messages-top-waves.svg'
 
 export const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[] | null>(null)
@@ -69,7 +70,8 @@ export const Chat: React.FC = () => {
 
   return (
     <>
-      <div className="page">
+      <img  className="messages-top-waves" src={messagesTopWaves} />
+      <div className="page message-listing-window">
         <h2 className="section-header">Messages</h2>
         <List>
           {matches && matches.map((m, k) =>

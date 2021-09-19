@@ -1,7 +1,7 @@
 @import "./colors.scss";
 
 .message-window {
-  height: 100vh;
+  min-height: 100vh;
   .message-header {
     height: 100px;
     width: 100%;
@@ -67,5 +67,22 @@
         padding: 20px;
       }
     }
+  }
+}
+
+.message-listing-window {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 115px 15px 80px 15px;
+  z-index: 1;
+}
+
+.messages-top-waves {
+  position: fixed;
+  top: -5px;
+  width: 100%;
+  @media screen and (min-width: 430px) {
+    top: -20%;
   }
 }
