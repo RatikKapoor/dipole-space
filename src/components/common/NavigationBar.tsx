@@ -14,7 +14,7 @@ export const NavigationBar: React.FC = () => {
             <Link to="/matching">
                 <Icon size={'45px'} icon={"dipole"} />
             </Link>
-            <Link to="/matching">
+            <Link to="/profile">
                 <Icon size={'30px'} icon={"user"} />
             </Link>
             <Link to="/settings">
