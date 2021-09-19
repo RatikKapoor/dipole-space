@@ -89,9 +89,9 @@ export const ChatWindow: React.FC = () => {
             <div className="upload-image">
 
             </div> */}
-            <TextField value={composeMessageText} onChange={e => setComposeMessageText(e.target.value)} />
+            <TextField value={composeMessageText} onChange={e => setComposeMessageText(e.target.value)} className="message-textbox" />
 
-            <Button onClick={sendMessage}>Send</Button>
+            <Button onClick={sendMessage} className="send-button" >Send</Button>
           </div>
         </div>
       </div>
