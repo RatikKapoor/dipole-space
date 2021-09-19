@@ -9,6 +9,9 @@ import {
 import { ChevronLeft } from "@mui/icons-material";
 import darkBlueWaves from '../styles/vectors/dark-blue-waves.svg'
 import lightBlueWaves from '../styles/vectors/light-blue-waves.svg'
+import landingIconTop from "../styles/vectors/landing-icon-top.svg";
+import landingIconBottom from "../styles/vectors/landing-icon-bottom.svg";
+import { useHistory } from "react-router";
 
 export const SignUp: React.FC = () => {
     const auth = getAuth()
@@ -24,6 +27,8 @@ export const SignUp: React.FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [signUpPage, setSignUpPage] = useState<number>(1)
+
+    const history = useHistory()
 
     const createUserWithPassword = async (): Promise<boolean> => {
         try {
@@ -64,12 +69,11 @@ export const SignUp: React.FC = () => {
 
     return (
         <div className="auth-screen signup-screen">
-            {signUpPage === 2 &&
-                <div className="auth-back" onClick={() => setSignUpPage(1)}>
-                    <ChevronLeft />
-                    <p>Back</p>
-                </div>
-            }
+            <div className="auth-container">
+            <div className="auth-back" onClick={() => {signUpPage === 1 ? history.push("/") : setSignUpPage(1)}}>
+                <ChevronLeft />
+                <p>Back</p>
+            </div>
             <div className={`auth-header ${signUpPage === 2 && 'less-margin'}`}>
                 <h2>Create an account</h2>
             </div>
@@ -148,6 +152,13 @@ export const SignUp: React.FC = () => {
                     >
                         Create Account
                     </Button>
+            }
+            </div>
+            {   
+                signUpPage === 1 && <>
+                    <img className="signup-icon left" src={landingIconTop} />
+                    <img className="signup-icon right" src={landingIconBottom} />
+                </>
             }
             <img className={`footer-waves dark-waves ${signUpPage === 2 && 'shorter'}`} src={darkBlueWaves}/>
             { signUpPage === 1 && <img className="footer-waves light-waves" src={lightBlueWaves}/>}
