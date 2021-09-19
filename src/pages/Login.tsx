@@ -8,8 +8,12 @@ import {
     User as UserData,
     useFindUsersQuery,
 } from "../generated-types"
+import { useAppDispatch } from "../app/hooks";
+import { setUser } from "../features/user/userSlice";
 
 export const Login: React.FC = () => {
+    const dispatch = useAppDispatch()
+
     const [emailAddress, setEmailAddresss] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const findUsersQuery = useFindUsersQuery()
@@ -39,11 +43,15 @@ export const Login: React.FC = () => {
 
         const res = await loginUser(emailAddress, password)
         console.log("Login result", res)
+
+        if (!res) return
+
+        dispatch(setUser(res))
     }
 
     return (
-        <Container>
-            <Box>
+        <Container className="login-screen">
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <TextField
                     label="Email Address"
                     name="email"
@@ -61,11 +69,14 @@ export const Login: React.FC = () => {
                     control={<Checkbox value="rembember" color="primary" />}
                     label="Remember me"
                 />
+            </Box>
+            <Box>
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     onClick={handleSubmit}
+                    className="login-button"
                 >
                     Sign In
                 </Button>
