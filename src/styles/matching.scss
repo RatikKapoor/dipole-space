@@ -1,7 +1,18 @@
 @import './colors.scss';
 
 .introduction {
+    width: 70%;
+    
+    
 
+}
+
+.splash{
+    margin-top: -100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .top-activities {
@@ -22,13 +33,10 @@
     }
 
     #more-activities {
-        align-content: right;
+        float: right;
+        font-size: 9px;
     }
 
-}
-
-.splash {
-    width: 100%;
 }
 
 .future-plans {
@@ -44,7 +52,7 @@
             display: inline-block;
             align-items: center;
             justify-content: center;
-            background-color: $black;
+            background: $black;
             border-radius: 9px;
 
             .plan-list-icon {

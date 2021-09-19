@@ -24,11 +24,14 @@ const futurePlans: { id: number, icon: string, activity: string, location: strin
 
 const Introduction: React.FC = () => {
   return (
+    <>
     <div className="introduction">
       <h1>{name}</h1>
       <p id="age">{gender} {age}</p>
       <p>{bio}</p>
     </div>
+    <img className="splash" src={splash}/>
+    </>
   );
 };
 
@@ -42,7 +45,7 @@ const TopActivities: React.FC = () => {
     <div className="top-activities">
       <h2>Top Activities</h2>
       <ul className="activity-list">{listItems}</ul>
-      <Button>More Activities</Button>
+      <div id="more-activities"><Button>More Activities</Button></div>
     </div>
   );
 };
@@ -72,7 +75,6 @@ export const Matching: React.FC = () => {
     <div className="page">
       <Container maxWidth="xs">
         <Introduction />
-        <img src={splash} className="splash" />
         <TopActivities />
         <FuturePlans />
       </Container>
