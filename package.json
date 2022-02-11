@@ -20,7 +20,7 @@
     "@types/react-redux": "^7.1.7",
     "firebase": "^9.0.2",
     "icomoon-react": "^2.0.19",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
